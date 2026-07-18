@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aging in Place — Metro Mobile Healthcare (Draft)</title>
+<style>
+  :root{
+    --teal:#154C47;
+    --orange:#F44B1A;
+    --amber:#F7941D;
+    --lightteal:#47B9B7;
+    --cream:#FBF9F6;
+    --ink:#2B2B2B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Montserrat', Arial, sans-serif;
+    color:var(--teal);
+    margin:0 0 .5em 0;
+  }
+  .draft-banner{
+    background:#333;color:#fff;text-align:center;padding:8px;
+    font-size:13px;letter-spacing:.5px;
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px;background:#fff;border-bottom:1px solid #eee;
+    position:sticky;top:0;z-index:50;
+  }
+  nav .logo{font-weight:700;color:var(--teal);font-size:18px;}
+  nav ul{list-style:none;display:flex;gap:28px;margin:0;padding:0;font-size:14px;}
+  nav ul li.active a{color:var(--orange);font-weight:600;}
+  nav a{color:var(--teal);text-decoration:none;}
+  @media (max-width:900px){ nav ul{display:none;} }
+
+  .hero{
+    background:linear-gradient(100deg, var(--teal) 0%, var(--teal) 45%, var(--orange) 100%);
+    color:#fff;padding:90px 40px 70px;text-align:center;
+  }
+  .hero h1{color:#fff;font-size:38px;max-width:760px;margin:0 auto 16px auto;}
+  .hero p{max-width:620px;margin:0 auto 32px auto;font-size:17px;color:#f0ede8;}
+  .btn{
+    display:inline-block;background:var(--amber);color:#fff;
+    padding:14px 30px;border-radius:4px;text-decoration:none;
+    font-weight:600;font-family:'Montserrat',sans-serif;font-size:15px;
+    border:none;cursor:pointer;
+  }
+  .btn:hover{background:#e08312;}
+  .btn-outline{
+    display:inline-block;background:transparent;color:#fff;
+    padding:13px 28px;border-radius:4px;text-decoration:none;
+    font-weight:600;font-family:'Montserrat',sans-serif;font-size:15px;
+    border:1px solid rgba(255,255,255,.6);margin-left:12px;
+  }
+  .hero-ctas{margin-bottom:8px;}
+  .hero-note{font-size:13px;color:#e6e2da;opacity:.85;}
+
+  .stat-bar{
+    background:#0F3A36;color:#fff;padding:26px 40px;
+    display:flex;justify-content:center;gap:60px;flex-wrap:wrap;text-align:center;
+  }
+  .stat-bar .stat b{display:block;font-family:'Montserrat',sans-serif;font-size:26px;color:var(--lightteal);}
+  .stat-bar .stat span{font-size:13px;color:#dcdcdc;}
+
+  section{padding:64px 40px;max-width:1000px;margin:0 auto;}
+  .problem{text-align:center;}
+  .problem p{max-width:700px;margin:0 auto;font-size:17px;color:#444;}
+
+  .steps{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+  .step{
+    flex:1;min-width:220px;max-width:280px;background:#fff;
+    border-radius:8px;padding:28px 22px;text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:4px solid var(--lightteal);
+  }
+  .step:nth-child(2){border-top-color:var(--amber);}
+  .step:nth-child(3){border-top-color:var(--orange);}
+  .step h3{font-size:17px;}
+  .step p{font-size:14px;color:#555;margin:0 0 8px 0;}
+  .step .step-detail{font-size:13px;color:#888;font-style:italic;}
+
+  .services{background:#fff;}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;
+  }
+  @media (max-width:700px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{
+    background:var(--cream);border-radius:8px;padding:24px 22px;text-align:left;
+    border-left:4px solid var(--lightteal);
+  }
+  .service-card h4{margin:0 0 6px 0;font-size:15px;font-weight:700;color:var(--teal);font-family:'Montserrat',sans-serif;}
+  .service-card p{margin:0;font-size:13.5px;color:#555;}
+
+  .pricing{
+    display:flex;gap:24px;flex-wrap:wrap;align-items:stretch;margin-top:20px;
+  }
+  .price-card{
+    flex:1;min-width:260px;background:#fff;border-radius:10px;padding:32px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .price-card.featured{border:2px solid var(--amber);position:relative;}
+  .price-card.featured::before{
+    content:"MOST REQUESTED";position:absolute;top:-12px;left:24px;
+    background:var(--amber);color:#fff;font-size:11px;font-weight:700;
+    padding:4px 10px;border-radius:4px;letter-spacing:.5px;
+    font-family:'Montserrat',sans-serif;
+  }
+  .price-card h3{font-size:17px;margin-bottom:4px;}
+  .price-card .price{font-family:'Montserrat',sans-serif;font-size:32px;color:var(--orange);margin:8px 0;}
+  .price-card .price span{font-size:14px;color:#888;font-weight:400;}
+  .price-card ul{padding-left:18px;font-size:14px;color:#444;margin:16px 0;}
+  .price-card li{margin-bottom:6px;}
+
+  .testimonials{background:var(--cream);}
+  .testi-grid{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;}
+  .testi-card{
+    flex:1;min-width:260px;background:#fff;border-radius:8px;padding:26px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+  }
+  .testi-card p{font-size:15px;color:#444;font-style:italic;margin:0 0 14px 0;}
+  .testi-card .name{font-size:13px;font-weight:700;color:var(--teal);font-family:'Montserrat',sans-serif;}
+  .testi-card .stars{color:var(--amber);letter-spacing:2px;margin-bottom:10px;}
+  .testi-note{text-align:center;font-size:12px;color:#999;margin-top:10px;}
+
+  .why{
+    background:var(--teal);color:#fff;border-radius:10px;
+    padding:44px;margin:64px auto;max-width:1000px;
+  }
+  .why h2{color:#fff;}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;margin-top:20px;}
+  @media (max-width:700px){ .why-grid{grid-template-columns:1fr;} }
+  .why-item{display:flex;gap:12px;align-items:flex-start;}
+  .why-item .check{
+    flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:var(--lightteal);color:var(--teal);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+  }
+  .why-item p{margin:0;font-size:15px;color:#e8f2f1;}
+
+  .faq details{
+    border-bottom:1px solid #ddd;padding:16px 0;
+  }
+  .faq summary{
+    font-family:'Montserrat',sans-serif;font-weight:600;
+    cursor:pointer;color:var(--teal);font-size:16px;
+  }
+  .faq p{margin:10px 0 0 0;color:#444;font-size:15px;}
+
+  .contact{
+    background:var(--orange);color:#fff;padding:60px 40px;
+  }
+  .contact-wrap{
+    max-width:1000px;margin:0 auto;display:flex;gap:48px;flex-wrap:wrap;
+  }
+  .contact-form{flex:1;min-width:280px;}
+  .contact-form input,.contact-form textarea{
+    width:100%;padding:12px;margin-bottom:12px;border:none;border-radius:4px;
+    font-family:'Inter',sans-serif;
+  }
+  .contact-form button{
+    background:var(--teal);color:#fff;border:none;padding:14px 28px;
+    border-radius:4px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;
+  }
+  .contact-direct{flex:1;min-width:220px;}
+  .contact-direct h3{color:#fff;}
+  .contact-direct a{color:#fff;font-weight:700;}
+  .contact-direct .hours{font-size:14px;color:#fff0e8;margin-top:18px;}
+
+  .sticky-cta{
+    display:none;position:fixed;bottom:0;left:0;right:0;background:var(--teal);
+    padding:12px 20px;text-align:center;z-index:100;box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  }
+  .sticky-cta a{color:#fff;font-weight:700;text-decoration:none;font-family:'Montserrat',sans-serif;}
+  @media (max-width:700px){ .sticky-cta{display:block;} body{padding-bottom:56px;} }
+
+  footer{
+    background:#111;color:#aaa;text-align:center;padding:24px;font-size:13px;
+  }
+  footer a{color:#ccc;}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">ROUGH DRAFT — layout concept only, not final copy or functionality</div>
+
+<nav>
+  <div class="logo">METRO MOBILE HEALTHCARE</div>
+  <ul>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Service &amp; Treatment</a></li>
+    <li><a href="#">Patient Center</a></li>
+    <li><a href="#">Our Clinic</a></li>
+    <li><a href="#">Senior Fall Monitoring</a></li>
+    <li class="active"><a href="#">Aging in Place</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1>Aging in Place, Safely</h1>
+  <p>Your home should keep you safe — not put you at risk. We help Tulsa-area families modify homes so loved ones can stay independent, comfortable, and safe for years to come.</p>
+  <div class="hero-ctas">
+    <a class="btn" href="#contact-section">Request a Home Safety Assessment — $299</a>
+    <a class="btn-outline" href="tel:9182169303">Call (918) 216-9303</a>
+  </div>
+  <p class="hero-note">Licensed PT/OT-led evaluation. No physician referral needed. Serving the greater Tulsa metro.</p>
+</div>
+
+<div class="stat-bar">
+  <div class="stat"><b>1 in 4</b><span>seniors 65+ falls each year (CDC)</span></div>
+  <div class="stat"><b>50+ mi</b><span>service radius around Tulsa</span></div>
+  <div class="stat"><b>PT/OT-led</b><span>clinical evaluation, not a sales visit</span></div>
+  <div class="stat"><b>2–14 days</b><span>typical turnaround on small projects</span></div>
+</div>
+
+<section class="problem">
+  <h2>Homes weren't built for growing older</h2>
+  <p>Narrow doorways that won't fit a walker. Staircases that become a daily risk. Tubs and low toilets that make simple tasks dangerous. For many families, the home someone has lived in for decades slowly becomes the biggest threat to their safety — and assisted living isn't always the answer they want, or can afford. A fall serious enough to need hospitalization can cost more, and take more independence, than fixing the home ever would.</p>
+</section>
+
+<section class="how">
+  <h2 style="text-align:center;">How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <h3>1. Clinical Evaluation</h3>
+      <p>A physical or occupational therapist walks the home with you, evaluating mobility, balance, and daily function room by room.</p>
+      <p class="step-detail">Flat $299, scheduled within a week</p>
+    </div>
+    <div class="step">
+      <h3>2. Coordinated Planning</h3>
+      <p>We coordinate with our contractor partner to design the right solution and provide a clear, itemized quote — no surprises.</p>
+      <p class="step-detail">Written quote, no obligation to proceed</p>
+    </div>
+    <div class="step">
+      <h3>3. Installation</h3>
+      <p>Our contractor team completes the work, supervised by our partners at Grab Bars of Tulsa, then we check it against the original evaluation.</p>
+      <p class="step-detail">Final walkthrough included</p>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <h2 style="text-align:center;">Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h4>Grab Bars &amp; Handrails</h4>
+      <p>Properly anchored into studs, placed where a therapist has actually watched someone reach, sit, and stand.</p>
+    </div>
+    <div class="service-card">
+      <h4>Doorway Widening</h4>
+      <p>For walkers and wheelchairs to clear thresholds without catching or tipping.</p>
+    </div>
+    <div class="service-card">
+      <h4>Ramp Construction</h4>
+      <p>Code-compliant slope and landings, built for the specific entrance and weather exposure.</p>
+    </div>
+    <div class="service-card">
+      <h4>Bathroom Conversions</h4>
+      <p>Walk-in showers, raised toilets, and non-slip surfaces where falls happen most often.</p>
+    </div>
+    <div class="service-card">
+      <h4>Flooring &amp; Threshold Repair</h4>
+      <p>Removing trip hazards — loose transitions, thick rugs, uneven thresholds between rooms.</p>
+    </div>
+    <div class="service-card">
+      <h4>Custom Safety Solutions</h4>
+      <p>Every home is different; we scope one-off fixes a general contractor wouldn't think to flag.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <h2 style="text-align:center;">Simple, Transparent Pricing</h2>
+  <div class="pricing" style="margin-top:0;">
+    <div class="price-card featured">
+      <h3>Home Safety Assessment</h3>
+      <div class="price">$299 <span>flat rate</span></div>
+      <ul>
+        <li>In-home evaluation by a licensed PT or OT</li>
+        <li>Written report with prioritized recommendations</li>
+        <li>Itemized quote from our contractor partner</li>
+        <li>No obligation to move forward</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <h3>Modifications &amp; Renovations</h3>
+      <div class="price">Quoted <span>per project</span></div>
+      <ul>
+        <li>Priced from your assessment, not a generic catalog</li>
+        <li>Grab bars typically same-week</li>
+        <li>Larger projects: 2 weeks to 2 months</li>
+        <li>Private pay — no insurance delays</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="why">
+  <h2>Why Metro Mobile</h2>
+  <div class="why-grid">
+    <div class="why-item"><div class="check">✓</div><p>Clinically-driven recommendations from licensed physical and occupational therapists — not just a contractor's upsell</p></div>
+    <div class="why-item"><div class="check">✓</div><p>Built in partnership with Grab Bars of Tulsa, trusted installers with years of hands-on experience</p></div>
+    <div class="why-item"><div class="check">✓</div><p>Private pay, direct access — no insurance delays or referrals required</p></div>
+    <div class="why-item"><div class="check">✓</div><p>Optional integration with our Nobi and Vayyar fall monitoring systems</p></div>
+    <div class="why-item"><div class="check">✓</div><p>One coordinated team: assessment, modification, monitoring, and ongoing therapy</p></div>
+    <div class="why-item"><div class="check">✓</div><p>Local, Tulsa-based — the same team you can call back a year later</p></div>
+  </div>
+</div>
+
+<section class="testimonials">
+  <h2 style="text-align:center;">What Families Are Saying</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"The therapist noticed things we never would have — like the bathroom threshold my mom kept catching her foot on."</p>
+      <div class="name">— Placeholder quote, family caregiver</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"We got a real quote in writing, not a sales pitch. The whole process took less than three weeks."</p>
+      <div class="name">— Placeholder quote, homeowner</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Having the same team do the assessment and the fall monitoring setup made everything simpler."</p>
+      <div class="name">— Placeholder quote, adult child of client</div>
+    </div>
+  </div>
+  <p class="testi-note">Placeholder quotes for layout only — swap in real client testimonials before publishing.</p>
+</section>
+
+<section class="faq">
+  <h2 style="text-align:center;">Frequently Asked Questions</h2>
+  <details>
+    <summary>What is a home safety assessment?</summary>
+    <p>An in-home evaluation performed by a physical or occupational therapist to identify ways to make your home safer and easier to navigate as you age.</p>
+  </details>
+  <details>
+    <summary>Do I need a doctor's referral?</summary>
+    <p>No. This is direct access, private pay — no physician referral required.</p>
+  </details>
+  <details>
+    <summary>Is this covered by insurance?</summary>
+    <p>The therapy evaluation may be billable in some cases, but modifications and renovations are private pay.</p>
+  </details>
+  <details>
+    <summary>How much does a project cost?</summary>
+    <p>The assessment itself is a flat $299. Modifications depend on your needs, materials, and home construction — we quote based on your actual situation after the evaluation.</p>
+  </details>
+  <details>
+    <summary>How long does a project take?</summary>
+    <p>A single grab bar can be done quickly; larger projects like ramps or bathroom conversions may take two weeks to two months.</p>
+  </details>
+  <details>
+    <summary>Do you serve areas outside Tulsa?</summary>
+    <p>Yes, generally within 50 miles of the greater Tulsa metro area.</p>
+  </details>
+  <details>
+    <summary>Who actually does the evaluation?</summary>
+    <p>A licensed physical or occupational therapist from our clinical team — the same clinicians who provide home health therapy visits.</p>
+  </details>
+  <details>
+    <summary>Who does the actual construction work?</summary>
+    <p>Our contractor partner, Grab Bars of Tulsa, handles installation. We stay involved to make sure the finished work matches the clinical recommendations.</p>
+  </details>
+  <details>
+    <summary>What if I just want one thing fixed, like a grab bar?</summary>
+    <p>That's fine — not every visit turns into a full renovation. Many families start with one or two specific fixes and add more later.</p>
+  </details>
+  <details>
+    <summary>Can this work alongside fall monitoring or a Nobi/Vayyar system?</summary>
+    <p>Yes. Many families pair a home safety assessment with our fall detection and remote monitoring services for a more complete safety plan.</p>
+  </details>
+  <details>
+    <summary>Is the $299 assessment fee applied toward the renovation cost?</summary>
+    <p>This is still being finalized — check with our team when you schedule, as this policy may vary.</p>
+  </details>
+</section>
+
+<div class="contact" id="contact-section">
+  <div class="contact-wrap">
+    <div class="contact-form">
+      <h3>Request a Home Safety Assessment</h3>
+      <input type="text" placeholder="Full Name">
+      <input type="email" placeholder="Email">
+      <input type="tel" placeholder="Phone Number">
+      <textarea rows="4" placeholder="Tell us about your interests or needs..."></textarea>
+      <button>Send Request</button>
+    </div>
+    <div class="contact-direct">
+      <h3>Prefer to Call?</h3>
+      <p>Reach us directly at:</p>
+      <a href="tel:9182169303">(918) 216-9303</a>
+      <p class="hours">Mon–Fri, 8am–5pm. We're happy to answer questions before you commit to anything.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-cta">
+  <a href="tel:9182169303">Call (918) 216-9303 to schedule your assessment →</a>
+</div>
+
+<footer>
+  © 2026 Metro Mobile Healthcare — Draft layout for internal review
+</footer>
+
+</body>
+</html>
