@@ -17,6 +17,10 @@
     --harbor:#2B4552;
     --clay:#A8552E;
     --teal:#1e8fa0;
+    --brand-orange:#F44B1A;
+    --brand-amber:#F7941D;
+    --brand-teal:#47B9B7;
+    --brand-deep:#154C47;
     --ink:#2A2420;
     --paper:#FAF7F0;
     --line:#D7CDB6;
@@ -50,17 +54,18 @@
   /* ---- masthead / logo lockup ---- */
   .masthead{text-align:center;padding:10px 44px 6px;}
   .masthead .mark{
-    display:inline-flex;align-items:center;gap:12px;margin-bottom:14px;
+    display:inline-flex;align-items:center;margin-bottom:16px;
   }
-  .masthead .mark svg{width:40px;height:40px;flex-shrink:0;}
-  .masthead .wordmark{text-align:left;}
-  .masthead .wordmark .company{
-    font-family:'Source Serif 4',serif;font-weight:700;font-size:26px;color:var(--walnut);
-    line-height:1.1;
+  .masthead .logo-chip{
+    background:#fff;border-radius:10px;padding:14px 22px;
+    box-shadow:0 1px 3px rgba(0,0,0,.05);
   }
-  .masthead .wordmark .division{
+  .masthead .logo-chip img{
+    display:block;height:52px;width:auto;
+  }
+  .masthead .division{
     font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--moss);margin-top:2px;
+    text-transform:uppercase;color:var(--moss);margin:10px 0 0;
   }
   .slogan{
     font-family:'Source Serif 4',serif;font-style:italic;font-weight:500;
@@ -73,7 +78,7 @@
   }
   .hero-photo-frame{
     position:relative;border-radius:14px;overflow:hidden;
-    aspect-ratio:16/7;background:linear-gradient(120deg, var(--walnut) 0%, var(--harbor) 100%);
+    aspect-ratio:16/9;background:linear-gradient(120deg, var(--walnut) 0%, var(--harbor) 100%);
     display:flex;align-items:center;justify-content:center;
   }
   .hero-photo-frame img{
@@ -111,16 +116,16 @@
   .option-banner{
     height:120px;display:flex;align-items:center;justify-content:center;
   }
-  .option.aging .option-banner{background:linear-gradient(120deg, #E7DAC8 0%, var(--clay) 140%);}
-  .option.fall .option-banner{background:linear-gradient(120deg, #DCEEF0 0%, var(--teal) 140%);}
+  .option.aging .option-banner{background:linear-gradient(120deg, #F7C79A 0%, var(--brand-orange) 140%);}
+  .option.fall .option-banner{background:linear-gradient(120deg, #BEE7E5 0%, var(--brand-teal) 140%);}
   .option-banner svg{width:46px;height:46px;}
   .option-body{padding:32px 34px 34px;display:flex;flex-direction:column;flex-grow:1;}
   .option .tag{
     font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
     text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;
   }
-  .option.aging .tag{color:var(--clay);}
-  .option.fall .tag{color:var(--teal);}
+  .option.aging .tag{color:var(--brand-orange);}
+  .option.fall .tag{color:var(--brand-deep);}
   .option h2{font-size:24px;margin-bottom:12px;}
   .option p{color:var(--walnut-soft);font-size:15.5px;margin-bottom:22px;flex-grow:1;}
   .option ul{padding-left:20px;margin:0 0 26px 0;font-size:14.5px;color:var(--walnut-soft);}
@@ -130,8 +135,8 @@
     font-weight:700;font-size:15px;padding:14px 24px;border-radius:4px;
     color:#fff;align-self:flex-start;
   }
-  .option.aging .go{background:var(--clay);}
-  .option.fall .go{background:var(--teal);}
+  .option.aging .go{background:var(--brand-orange);}
+  .option.fall .go{background:var(--brand-teal);}
   .option .go:hover{opacity:.9;}
 
   .picker-caption{
@@ -160,34 +165,17 @@
 
 <div class="masthead">
   <div class="mark">
-    <svg viewBox="0 0 48 48" fill="none">
-      <path d="M8 22L24 8L40 22" stroke="#4A3728" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M12 20V38C12 39.1 12.9 40 14 40H34C35.1 40 36 39.1 36 38V20" stroke="#4A3728" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M24 40V29C24 27.9 24.9 27 26 27H26.5C27.4 27 28.1 27.6 28.4 28.4L28.8 29.6C29.1 30.4 29.8 31 30.7 31H31" stroke="#A8552E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M18 30C18 30 19.5 28 21 29.5C22.5 31 18 35 18 35C18 35 13.5 31 15 29.5C16.5 28 18 30 18 30Z" fill="#57715F"/>
-    </svg>
-    <div class="wordmark">
-      <div class="company">Metro Mobile Health Care</div>
-      <div class="division">Home Safety &amp; Independence Services</div>
+    <div class="logo-chip">
+      <img src="assets/metro-logo.jpg" alt="Metro Mobile Healthcare">
     </div>
   </div>
+  <div class="division">Home Safety &amp; Independence Services</div>
   <p class="slogan">Helping the people you love stay safely home — for years to come.</p>
 </div>
 
 <div class="hero-photo">
   <div class="hero-photo-frame">
-    <!--
-      Replace this placeholder with a real photo before publishing — something
-      warm and specific: an adult child and an aging parent together in a home
-      setting, or a therapist visiting with a client. Swap the block below for:
-      <img src="your-photo.jpg" alt="A family caring for an aging parent at home">
-    -->
-    <div class="hero-placeholder">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 21C12 21 4 15.5 4 9.8C4 6.6 6.5 4 9.5 4C11 4 12 5 12 5C12 5 13 4 14.5 4C17.5 4 20 6.6 20 9.8C20 15.5 12 21 12 21Z"/>
-      </svg>
-      <span>Photo placeholder — add a real photo here</span>
-    </div>
+    <img src="assets/hero-photo.png" alt="A woman moving confidently between her bedroom and a modified, accessible bathroom">
   </div>
 </div>
 
@@ -198,7 +186,7 @@
 <div class="picker">
   <div class="option aging">
     <div class="option-banner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#4A3728" stroke-width="1.8">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8">
         <path d="M3 10L12 3L21 10"/>
         <path d="M5 9V20C5 20.6 5.4 21 6 21H18C18.6 21 19 20.6 19 20V9"/>
         <path d="M9 21V14C9 13.4 9.4 13 10 13H14C14.6 13 15 13.4 15 14V21"/>
@@ -219,7 +207,7 @@
 
   <div class="option fall">
     <div class="option-banner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#134048" stroke-width="1.8">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8">
         <circle cx="12" cy="12" r="9"/>
         <path d="M12 7V12L15.5 14.5"/>
       </svg>
