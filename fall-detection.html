@@ -50,9 +50,10 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .nav-brand { display: flex; flex-direction: column; }
-    .nav-brand .company { font-weight: 600; font-size: 1rem; color: var(--white); letter-spacing: 0.01em; }
-    .nav-brand .tagline { font-size: 0.72rem; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; }
+    .nav-brand { display: flex; align-items: center; gap: 12px; }
+    .nav-brand .logo-chip { background: #fff; border-radius: 6px; padding: 6px 10px; display: flex; align-items: center; }
+    .nav-brand .logo-chip img { height: 26px; width: auto; display: block; }
+    .nav-brand .tagline { font-size: 0.72rem; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; }
     .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.07); border-radius: 8px; padding: 4px; }
     .nav-switch a {
@@ -375,7 +376,9 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">
-    <span class="company">Metro Mobile Health Care</span>
+    <div class="logo-chip">
+      <img src="assets/metro-logo.jpg" alt="Metro Mobile Healthcare">
+    </div>
     <span class="tagline">Powered by TLS Global</span>
   </div>
   <div class="nav-links">
