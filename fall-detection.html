@@ -11,13 +11,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --teal:    #1e8fa0;
-      --teal-dark: #136e7c;
-      --teal-light: #e6f6f8;
-      --orange:  #e8722a;
-      --orange-light: #fdf0e8;
-      --navy:    #1a2e42;
-      --navy-mid: #2c4a63;
+      --teal:    #47B9B7;
+      --teal-dark: #2E8583;
+      --teal-light: #E7F6F5;
+      --orange:  #F44B1A;
+      --orange-light: #FEECE5;
+      --navy:    #154C47;
+      --navy-mid: #1E6B65;
       --white:   #ffffff;
       --gray-100: #f4f7f9;
       --gray-200: #e8edf2;
@@ -77,14 +77,14 @@
       content: '';
       position: absolute; top: -80px; right: -80px;
       width: 520px; height: 520px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,143,160,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(71,185,183,0.18) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero::after {
       content: '';
       position: absolute; bottom: -60px; left: -60px;
       width: 380px; height: 380px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,114,42,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(244,75,26,0.1) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero-inner {
@@ -94,8 +94,8 @@
     }
     .hero-eyebrow {
       display: inline-block;
-      background: rgba(30,143,160,0.2); border: 1px solid rgba(30,143,160,0.4);
-      color: #7dd8e4; font-size: 0.75rem; font-weight: 600;
+      background: rgba(71,185,183,0.2); border: 1px solid rgba(71,185,183,0.4);
+      color: #8AD6D4; font-size: 0.75rem; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
       padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
     }
@@ -104,7 +104,7 @@
       font-size: clamp(2.2rem, 4vw, 3.4rem);
       color: var(--white); line-height: 1.15; margin-bottom: 22px;
     }
-    .hero h1 em { font-style: italic; color: #7dd8e4; }
+    .hero h1 em { font-style: italic; color: #8AD6D4; }
     .hero-sub { color: #a8c4d0; font-size: 1.08rem; font-weight: 300; margin-bottom: 36px; max-width: 480px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
@@ -118,13 +118,13 @@
       padding: 13px 26px; border-radius: 8px; font-weight: 500; font-size: 0.95rem;
       text-decoration: none; transition: border-color 0.2s, background 0.2s; display: inline-block;
     }
-    .btn-outline:hover { border-color: var(--teal); background: rgba(30,143,160,0.12); }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(71,185,183,0.12); }
 
     .hero-stats {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 16px; padding: 36px 32px; backdrop-filter: blur(12px);
     }
-    .hero-stats h3 { color: #7dd8e4; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+    .hero-stats h3 { color: #8AD6D4; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
     .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--white); line-height: 1; }
     .stat-num span { color: var(--orange); }
@@ -197,7 +197,7 @@
     }
     .privacy-block { text-align: center; padding: 28px; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
     .privacy-block .privacy-tag {
-      display: inline-block; background: rgba(30,143,160,0.25); color: #7dd8e4;
+      display: inline-block; background: rgba(71,185,183,0.25); color: #8AD6D4;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       padding: 4px 12px; border-radius: 20px; margin-bottom: 14px;
     }
@@ -229,7 +229,7 @@
     .tech-highlight::before {
       content: ''; position: absolute; top: -40px; right: -40px;
       width: 260px; height: 260px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(30,143,160,0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(71,185,183,0.25) 0%, transparent 70%);
     }
     .tech-highlight h3 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--white); margin-bottom: 14px; position: relative; z-index: 1; }
     .tech-highlight p { color: #a8c4d0; font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; position: relative; z-index: 1; }
@@ -237,7 +237,7 @@
     .no-list li { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 0.92rem; font-weight: 500; }
     .no-list li::before {
       content: '✗'; display: flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; background: rgba(232,114,42,0.25); color: var(--orange);
+      width: 22px; height: 22px; background: rgba(244,75,26,0.25); color: var(--orange);
       border-radius: 50%; font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
     }
 
@@ -271,7 +271,7 @@
     .pilot-section { background: linear-gradient(135deg, var(--navy) 0%, #1a4a5a 100%); padding: 80px 40px; }
     .pilot-inner { max-width: 1100px; margin: 0 auto; }
     .pilot-header { margin-bottom: 48px; }
-    .pilot-header .section-label { color: #7dd8e4; }
+    .pilot-header .section-label { color: #8AD6D4; }
     .pilot-header .section-title { color: var(--white); }
     .pilot-header .section-sub { color: #a8c4d0; }
     .pilot-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -336,8 +336,8 @@
     /* ── FOOTER ── */
     footer { background: var(--navy); padding: 32px 40px; text-align: center; }
     .footer-brand { font-weight: 600; color: var(--white); font-size: 1rem; margin-bottom: 6px; }
-    .footer-phones { color: #7dd8e4; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
-    .footer-phones a { color: #7dd8e4; text-decoration: none; }
+    .footer-phones { color: #8AD6D4; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
+    .footer-phones a { color: #8AD6D4; text-decoration: none; }
     .footer-phones a:hover { text-decoration: underline; }
     .footer-sub { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
     .footer-sub a { color: var(--teal); text-decoration: none; }
@@ -377,7 +377,7 @@
 <nav>
   <div class="nav-brand">
     <div class="logo-chip">
-      <img src="assets/metro-logo.jpg" alt="Metro Mobile Healthcare">
+      <img src="assets/metro-logo-wide.png" alt="Metro Mobile Healthcare">
     </div>
     <span class="tagline">Powered by TLS Global</span>
   </div>
@@ -398,7 +398,7 @@
       <div class="hero-eyebrow">Introducing Evolve by TLS Global</div>
       <h1>Safety Without<br/><em>Sacrificing</em><br/>Independence</h1>
       <p class="hero-sub">Advanced fall detection technology — no wearables, no cameras, no buttons. Helping seniors and people with disabilities live safely in place with 24/7 intelligent monitoring.</p>
-      <p style="color:#7dd8e4;font-weight:600;font-size:0.92rem;margin:-20px 0 28px;">No-cost in-home consultation and evaluation — no obligation to proceed.</p>
+      <p style="color:#8AD6D4;font-weight:600;font-size:0.92rem;margin:-20px 0 28px;">No-cost in-home consultation and evaluation — no obligation to proceed.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Request Your Free Consultation</a>
         <a href="#video" class="btn-outline">▶ Watch How It Works</a>
@@ -586,7 +586,7 @@
           <li>Unreliable floor mats and pressure sensors</li>
         </ul>
         <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
-          <p style="color: #7dd8e4; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">The result</p>
+          <p style="color: #8AD6D4; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">The result</p>
           <p style="color: white; font-size: 1rem; line-height: 1.6; font-weight: 400;">True passive protection — always on, always aware, never in the way.</p>
         </div>
       </div>

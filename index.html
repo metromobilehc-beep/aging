@@ -9,21 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --plaster:#EDE6D6;
-    --walnut:#4A3728;
-    --walnut-soft:#6B5644;
-    --moss:#57715F;
-    --moss-soft:#7C9A87;
-    --harbor:#2B4552;
-    --clay:#A8552E;
-    --teal:#1e8fa0;
+    --plaster:#F2F7F6;
+    --walnut:#154C47;
+    --walnut-soft:#3D6B66;
+    --moss:#2E8583;
+    --moss-soft:#47B9B7;
+    --harbor:#154C47;
+    --clay:#F44B1A;
+    --teal:#47B9B7;
     --brand-orange:#F44B1A;
     --brand-amber:#F7941D;
     --brand-teal:#47B9B7;
     --brand-deep:#154C47;
-    --ink:#2A2420;
-    --paper:#FAF7F0;
-    --line:#D7CDB6;
+    --ink:#16302D;
+    --paper:#FFFFFF;
+    --line:#D7E8E6;
   }
   *{box-sizing:border-box;}
   body{
@@ -56,12 +56,8 @@
   .masthead .mark{
     display:inline-flex;align-items:center;margin-bottom:16px;
   }
-  .masthead .logo-chip{
-    background:#fff;border-radius:10px;padding:14px 22px;
-    box-shadow:0 1px 3px rgba(0,0,0,.05);
-  }
-  .masthead .logo-chip img{
-    display:block;height:52px;width:auto;
+  .masthead .mark img{
+    display:block;height:56px;width:auto;
   }
   .masthead .division{
     font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;
@@ -114,11 +110,28 @@
   }
   .option:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.09);}
   .option-banner{
-    height:120px;display:flex;align-items:center;justify-content:center;
+    height:160px;position:relative;overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:flex-start;
+  }
+  .option-banner img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+  .option-banner::after{
+    content:"";position:absolute;inset:0;
+  }
+  .option.aging .option-banner::after{background:linear-gradient(0deg, rgba(21,76,71,0.6) 0%, rgba(21,76,71,0) 60%);}
+  .option.fall .option-banner::after{background:linear-gradient(0deg, rgba(21,76,71,0.55) 0%, rgba(21,76,71,0) 60%);}
+  .option-banner .banner-placeholder{
+    position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;width:100%;gap:8px;color:rgba(255,255,255,0.9);
+  }
+  .option-banner .banner-placeholder svg{width:36px;height:36px;opacity:.85;}
+  .option-banner .banner-placeholder span{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:rgba(255,255,255,0.75);
   }
   .option.aging .option-banner{background:linear-gradient(120deg, #F7C79A 0%, var(--brand-orange) 140%);}
   .option.fall .option-banner{background:linear-gradient(120deg, #BEE7E5 0%, var(--brand-teal) 140%);}
-  .option-banner svg{width:46px;height:46px;}
   .option-body{padding:32px 34px 34px;display:flex;flex-direction:column;flex-grow:1;}
   .option .tag{
     font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
@@ -165,9 +178,7 @@
 
 <div class="masthead">
   <div class="mark">
-    <div class="logo-chip">
-      <img src="assets/metro-logo.jpg" alt="Metro Mobile Healthcare">
-    </div>
+    <img src="assets/metro-logo-wide.png" alt="Metro Mobile Healthcare">
   </div>
   <div class="division">Home Safety &amp; Independence Services</div>
   <p class="slogan">Helping the people you love stay safely home — for years to come.</p>
@@ -186,11 +197,7 @@
 <div class="picker">
   <div class="option aging">
     <div class="option-banner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8">
-        <path d="M3 10L12 3L21 10"/>
-        <path d="M5 9V20C5 20.6 5.4 21 6 21H18C18.6 21 19 20.6 19 20V9"/>
-        <path d="M9 21V14C9 13.4 9.4 13 10 13H14C14.6 13 15 13.4 15 14V21"/>
-      </svg>
+      <img src="assets/hero-photo.png" alt="A modified, accessible bathroom with grab bars and a walk-in shower" style="object-position: 75% 40%;">
     </div>
     <div class="option-body">
       <div class="tag">Home Modifications</div>
@@ -207,10 +214,19 @@
 
   <div class="option fall">
     <div class="option-banner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M12 7V12L15.5 14.5"/>
-      </svg>
+      <!--
+        Placeholder until a real photo is available — ideally a shot of the
+        Evolve/Vayyar sensor or Nobi smart light installed in a room, or the
+        monitoring center in action. Ask TLS Global for their marketing photos.
+        Swap in: <img src="assets/fall-detection-photo.jpg" alt="..." style="object-fit:cover;">
+      -->
+      <div class="banner-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7V12L15.5 14.5"/>
+        </svg>
+        <span>Photo placeholder — add an Evolve/TLS photo here</span>
+      </div>
     </div>
     <div class="option-body">
       <div class="tag">24/7 Monitoring · Free Consultation</div>

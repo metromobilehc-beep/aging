@@ -17,10 +17,12 @@ contact/referral forms to the same backend function, tagged by service.
 
 ## Files
 
-- `index.html` — hub/selector landing page (uses the real logo at `assets/metro-logo.jpg`)
+- `index.html` — hub/selector landing page (uses the real logo at `assets/metro-logo-wide.png`)
 - `fall-detection.html` — Fall Detection landing page
 - `aging-in-place.html` — Aging in Place landing page
-- `assets/metro-logo.jpg` — official Metro Mobile Healthcare logo (white background)
+- `assets/metro-logo-wide.png` — official Metro Mobile Healthcare logo, true
+  transparent PNG extracted from the source .ai file
+- `assets/hero-photo.png` — hero photo used on the hub page
 - `api/referral.js` — shared Vercel serverless function that receives both
   forms' submissions (distinguished by a `service` field: `fall-detection`
   or `aging-in-place`)
