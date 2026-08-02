@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Evolve Smart Safety System | Metro Mobile Health Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #1e8fa0;
+      --teal-dark: #136e7c;
+      --teal-light: #e6f6f8;
+      --orange:  #e8722a;
+      --orange-light: #fdf0e8;
+      --navy:    #1a2e42;
+      --navy-mid: #2c4a63;
+      --white:   #ffffff;
+      --gray-100: #f4f7f9;
+      --gray-200: #e8edf2;
+      --gray-500: #6b8090;
+      --gray-700: #3a4f62;
+      --text:    #1e2d3d;
+      --radius:  12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-brand { display: flex; flex-direction: column; }
+    .nav-brand .company { font-weight: 600; font-size: 1rem; color: var(--white); letter-spacing: 0.01em; }
+    .nav-brand .tagline { font-size: 0.72rem; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
+    .nav-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.07); border-radius: 8px; padding: 4px; }
+    .nav-switch a {
+      padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 500;
+      color: rgba(255,255,255,0.65); text-decoration: none; transition: background 0.2s, color 0.2s;
+    }
+    .nav-switch a.active { background: var(--teal); color: var(--white); font-weight: 600; }
+    .nav-switch a:hover:not(.active) { color: var(--white); }
+    .nav-cta { background: var(--orange); color: var(--white); padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .nav-cta:hover { background: #c75f20; }
+    @media (max-width: 700px) { .nav-switch { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a4a5a 100%);
+      padding: 90px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,143,160,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,114,42,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center; position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(30,143,160,0.2); border: 1px solid rgba(30,143,160,0.4);
+      color: #7dd8e4; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      color: var(--white); line-height: 1.15; margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: italic; color: #7dd8e4; }
+    .hero-sub { color: #a8c4d0; font-size: 1.08rem; font-weight: 300; margin-bottom: 36px; max-width: 480px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: var(--white);
+      padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-block; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #c75f20; transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.35); color: var(--white);
+      padding: 13px 26px; border-radius: 8px; font-weight: 500; font-size: 0.95rem;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--teal); background: rgba(30,143,160,0.12); }
+
+    .hero-stats {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 36px 32px; backdrop-filter: blur(12px);
+    }
+    .hero-stats h3 { color: #7dd8e4; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: var(--white); line-height: 1; }
+    .stat-num span { color: var(--orange); }
+    .stat-label { font-size: 0.8rem; color: #a8c4d0; margin-top: 4px; font-weight: 400; }
+    .stat-divider { grid-column: 1 / -1; height: 1px; background: rgba(255,255,255,0.1); }
+    .pilot-note { grid-column: 1 / -1; font-size: 0.73rem; color: rgba(168,196,208,0.7); font-style: italic; margin-top: -8px; }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip { background: var(--teal); padding: 20px 40px; }
+    .intro-strip-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; color: var(--white); font-size: 0.95rem; font-weight: 500; text-align: center;
+    }
+    .intro-strip-inner svg { flex-shrink: 0; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 80px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--navy); line-height: 1.2; margin-bottom: 16px; }
+    .section-sub { font-size: 1.05rem; color: var(--gray-500); font-weight: 400; max-width: 580px; }
+
+    /* ── WHY CHOOSE US ── */
+    .why-section { background: var(--teal-light); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 20px; margin-top: 48px;
+    }
+    .why-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center;
+      border: 1px solid var(--gray-200);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .why-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
+    .why-icon {
+      width: 54px; height: 54px; background: var(--teal-light);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .why-icon svg { width: 26px; height: 26px; stroke: var(--teal); fill: none; stroke-width: 2; }
+    .why-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works { background: var(--gray-100); }
+    .hiw-header { margin-bottom: 52px; }
+    .hiw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .hiw-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 32px 28px; border: 1px solid var(--gray-200);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .hiw-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.09); transform: translateY(-3px); }
+    .hiw-icon {
+      width: 52px; height: 52px; background: var(--teal-light);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    .hiw-icon svg { width: 26px; height: 26px; }
+    .hiw-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+    .hiw-card p { font-size: 0.92rem; color: var(--gray-500); line-height: 1.65; }
+
+    /* ── PRIVACY CALLOUT ── */
+    .privacy-banner {
+      background: var(--navy); padding: 48px 40px;
+    }
+    .privacy-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .privacy-block { text-align: center; padding: 28px; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; }
+    .privacy-block .privacy-tag {
+      display: inline-block; background: rgba(30,143,160,0.25); color: #7dd8e4;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .privacy-block h4 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--white); margin-bottom: 10px; }
+    .privacy-block p { font-size: 0.88rem; color: #a8c4d0; line-height: 1.65; }
+    .privacy-block .device-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); margin-top: 16px; }
+
+    /* ── TECHNOLOGY FEATURES ── */
+    .tech-features { background: var(--white); }
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: start; margin-top: 52px; }
+    .tech-feature-list { display: flex; flex-direction: column; gap: 24px; }
+    .tech-feature {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 22px; border-radius: var(--radius); border: 1px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tech-feature:hover { border-color: var(--teal-light); background: var(--teal-light); }
+    .tech-feat-icon {
+      width: 44px; height: 44px; background: var(--teal); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .tech-feat-icon svg { width: 22px; height: 22px; fill: none; stroke: white; stroke-width: 2; }
+    .tech-feature h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+    .tech-feature p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.6; }
+    .tech-highlight {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 20px; padding: 44px 38px; position: relative; overflow: hidden;
+    }
+    .tech-highlight::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,143,160,0.25) 0%, transparent 70%);
+    }
+    .tech-highlight h3 { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--white); margin-bottom: 14px; position: relative; z-index: 1; }
+    .tech-highlight p { color: #a8c4d0; font-size: 0.92rem; line-height: 1.7; margin-bottom: 24px; position: relative; z-index: 1; }
+    .no-list { list-style: none; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+    .no-list li { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 0.92rem; font-weight: 500; }
+    .no-list li::before {
+      content: '✗'; display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; background: rgba(232,114,42,0.25); color: var(--orange);
+      border-radius: 50%; font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── VIDEO ── */
+    .video-section { background: var(--gray-100); }
+    .video-wrap {
+      margin-top: 40px; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.13);
+      position: relative; padding-top: 56.25%;
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-note { margin-top: 16px; font-size: 0.82rem; color: var(--gray-500); text-align: center; }
+
+    /* ── WHO IT'S FOR ── */
+    .audiences { background: var(--white); }
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .audience-card { border-radius: var(--radius); padding: 32px 26px; border: 1px solid var(--gray-200); }
+    .audience-card.seniors { border-top: 4px solid var(--teal); }
+    .audience-card.families { border-top: 4px solid var(--orange); }
+    .audience-card.facilities { border-top: 4px solid var(--navy); }
+    .aud-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+    .seniors .aud-label { color: var(--teal); }
+    .families .aud-label { color: var(--orange); }
+    .facilities .aud-label { color: var(--navy); }
+    .audience-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+    .audience-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .audience-card ul li { font-size: 0.88rem; color: var(--gray-500); padding-left: 18px; position: relative; }
+    .audience-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 0.8rem; }
+
+    /* ── PILOT DATA ── */
+    .pilot-section { background: linear-gradient(135deg, var(--navy) 0%, #1a4a5a 100%); padding: 80px 40px; }
+    .pilot-inner { max-width: 1100px; margin: 0 auto; }
+    .pilot-header { margin-bottom: 48px; }
+    .pilot-header .section-label { color: #7dd8e4; }
+    .pilot-header .section-title { color: var(--white); }
+    .pilot-header .section-sub { color: #a8c4d0; }
+    .pilot-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .p-stat { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 28px 22px; text-align: center; }
+    .p-stat-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--white); line-height: 1; }
+    .p-stat-num span { color: var(--orange); }
+    .p-stat-label { font-size: 0.82rem; color: #a8c4d0; margin-top: 8px; line-height: 1.4; }
+    .pilot-footnote { margin-top: 20px; font-size: 0.75rem; color: rgba(168,196,208,0.6); font-style: italic; text-align: center; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--white); padding: 80px 40px; }
+    .cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .cta-left h2 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--navy); margin-bottom: 14px; }
+    .cta-left p { color: var(--gray-500); font-size: 1rem; line-height: 1.65; margin-bottom: 28px; }
+    .contact-items { display: flex; flex-direction: column; gap: 14px; }
+    .contact-item { display: flex; gap: 12px; align-items: flex-start; }
+    .contact-icon { width: 38px; height: 38px; background: var(--teal-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 2; }
+    .contact-item .c-label { font-size: 0.75rem; color: var(--gray-500); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .contact-item .c-val { font-size: 0.95rem; color: var(--navy); font-weight: 600; }
+    .contact-item a { color: var(--teal); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* Form */
+    .cta-form { background: var(--gray-100); border-radius: 16px; padding: 36px 32px; }
+    .cta-form h3 { font-size: 1.2rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+    .cta-form .form-sub { font-size: 0.87rem; color: var(--gray-500); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--gray-700); letter-spacing: 0.04em; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      background: var(--white); transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); }
+    .form-group textarea { resize: vertical; min-height: 88px; }
+    .form-submit {
+      width: 100%; background: var(--teal); color: var(--white); border: none;
+      padding: 14px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--teal-dark); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-disclaimer { font-size: 0.72rem; color: var(--gray-500); text-align: center; margin-top: 10px; line-height: 1.5; }
+    #evolve-form-status { display: block; text-align: center; margin-top: 12px; font-size: 0.85rem; font-weight: 600; color: var(--teal-dark); min-height: 1.2em; }
+    #evolve-form-status.error { color: var(--orange); }
+
+    /* Download strip */
+    .download-strip { background: var(--orange-light); border-top: 1px solid #f5d5bb; padding: 36px 40px; }
+    .download-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .download-text h4 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .download-text p { font-size: 0.88rem; color: var(--gray-500); }
+    .btn-download {
+      background: var(--orange); color: var(--white); padding: 12px 24px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background 0.2s;
+    }
+    .btn-download:hover { background: #c75f20; }
+    .btn-download svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); padding: 32px 40px; text-align: center; }
+    .footer-brand { font-weight: 600; color: var(--white); font-size: 1rem; margin-bottom: 6px; }
+    .footer-phones { color: #7dd8e4; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
+    .footer-phones a { color: #7dd8e4; text-decoration: none; }
+    .footer-phones a:hover { text-decoration: underline; }
+    .footer-sub { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+    .footer-sub a { color: var(--teal); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .why-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hiw-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .pilot-stats { grid-template-columns: 1fr 1fr; }
+      .cta-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .privacy-inner { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 16px 20px; }
+      section { padding: 60px 20px; }
+      .hero { padding: 60px 20px 50px; }
+      .pilot-section { padding: 60px 20px; }
+      .download-strip { padding: 28px 20px; }
+      .privacy-banner { padding: 40px 20px; }
+    }
+    @media (max-width: 480px) {
+      .pilot-stats { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-outline { text-align: center; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="company">Metro Mobile Health Care</span>
+    <span class="tagline">Powered by TLS Global</span>
+  </div>
+  <div class="nav-links">
+    <div class="nav-switch">
+      <a href="index.html">Home</a>
+      <a href="fall-detection.html" class="active">Fall Detection</a>
+      <a href="aging-in-place.html">Aging in Place</a>
+    </div>
+    <a href="#contact" class="nav-cta">Request Info</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Introducing Evolve by TLS Global</div>
+      <h1>Safety Without<br/><em>Sacrificing</em><br/>Independence</h1>
+      <p class="hero-sub">Advanced fall detection technology — no wearables, no cameras, no buttons. Helping seniors and people with disabilities live safely in place with 24/7 intelligent monitoring.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request More Info</a>
+        <a href="#video" class="btn-outline">▶ Watch How It Works</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <h3>Florida County Pilot Results</h3>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">365</div>
+          <div class="stat-label">Seniors monitored over 9 months</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">34</div>
+          <div class="stat-label">Falls detected &amp; responded to</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">36</div>
+          <div class="stat-label">EMT dispatches coordinated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">700<span>+</span></div>
+          <div class="stat-label">Activity alerts generated</div>
+        </div>
+        <div class="pilot-note">Real-world pilot deployment data. Results reflect 9 months of active monitoring.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-strip-inner">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Metro Mobile Health Care is your local Tulsa-area partner for Evolve — bringing world-class safety technology to seniors and people with disabilities across Oklahoma.
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section">
+  <div class="section-inner">
+    <div class="section-label">Why Evolve</div>
+    <h2 class="section-title">Why Families Choose Evolve</h2>
+    <p class="section-sub">Everything traditional alert systems get wrong — Evolve gets right.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h4>No Pendants or Wearables</h4>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h4>Dementia-Friendly</h4>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4>Affordable Peace of Mind</h4>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>Excellent Real-World Outcomes</h4>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 5.55 5.55l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h4>24/7 Wellness &amp; Concierge Desk</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="section-inner">
+    <div class="hiw-header">
+      <div class="section-label">The Evolve System</div>
+      <h2 class="section-title">How Evolve Protects the People You Care About</h2>
+      <p class="section-sub">Three layers of intelligent technology working together — so nothing gets missed and no one feels alone.</p>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>4D Radar Detection</h3>
+        <p>Vayyar Care sensors use 4D imaging radar to monitor an entire room — including the bathroom where 80% of falls occur — 24 hours a day. No cameras. No wearables. Complete privacy protection at all times.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>24/7 Remote Nurse Support</h3>
+        <p>The Evolve monitoring center is staffed around the clock by trained wellness professionals. When a fall is detected, a real person responds — coordinating care, dispatching emergency services, and notifying family.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <h3>Nobi Smart Lighting</h3>
+        <p>AI-powered ceiling lights that blend seamlessly into any room — brightening paths at night to prevent falls before they happen, while quietly detecting events and alerting caregivers when help is needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY CALLOUT -->
+<div class="privacy-banner">
+  <div class="privacy-inner">
+    <div class="privacy-block">
+      <div class="privacy-tag">Vayyar Technology</div>
+      <h4>Radar Waves — Never Video</h4>
+      <p>The Vayyar sensor detects movement and position using radar signals — the same technology in modern vehicles and aircraft. It sees through walls and in complete darkness, but captures zero images or video.</p>
+      <div class="device-label">100% Privacy · No Cameras · No Images</div>
+    </div>
+    <div class="privacy-block">
+      <div class="privacy-tag">Nobi Technology</div>
+      <h4>Digital Stick Figure — Never Video</h4>
+      <p>Nobi Smart Lights convert movement into an anonymous digital stick figure for analysis. Your loved one's face, identity, and appearance are never captured — just the motion data needed to detect a fall.</p>
+      <div class="device-label">100% Privacy · Anonymous Detection · No Recording</div>
+    </div>
+  </div>
+</div>
+
+<!-- TECHNOLOGY FEATURES -->
+<section class="tech-features">
+  <div class="section-inner">
+    <div class="section-label">Technology</div>
+    <h2 class="section-title">Built Different. Because It Had to Be.</h2>
+    <div class="tech-grid">
+      <div class="tech-feature-list">
+        <div class="tech-feature">
+          <div class="tech-feat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <div>
+            <h4>Works in Complete Darkness</h4>
+            <p>Radar technology requires no light source — monitoring continues reliably through the night, in steam-filled bathrooms, and in every condition that cameras and motion sensors fail.</p>
+          </div>
+        </div>
+        <div class="tech-feature">
+          <div class="tech-feat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h4>Privacy by Design</h4>
+            <p>No images or video are ever captured. Radar sensors track position and movement without identifying the person — protecting dignity while ensuring complete safety coverage.</p>
+          </div>
+        </div>
+        <div class="tech-feature">
+          <div class="tech-feat-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h4>Proactive Health Insights</h4>
+            <p>Evolve tracks movement patterns, bathroom visit frequency, time at rest, and activity levels — detecting subtle changes before they become emergencies so caregivers can intervene early.</p>
+          </div>
+        </div>
+        <div class="tech-feature">
+          <div class="tech-feat-icon">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          </div>
+          <div>
+            <h4>Concierge-Style Daily Support</h4>
+            <p>From medication reminders to arranging transportation and following up after incidents — the Evolve support team handles the daily details so families and seniors don't have to.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tech-highlight">
+        <h3>What Evolve Replaces</h3>
+        <p>Traditional fall alert systems put the burden on the person who just fell. Evolve eliminates the need for:</p>
+        <ul class="no-list">
+          <li>Wearable devices that go unworn</li>
+          <li>Emergency buttons out of reach during a fall</li>
+          <li>Privacy-invasive cameras in personal spaces</li>
+          <li>Alert cords and pull strings</li>
+          <li>Unreliable floor mats and pressure sensors</li>
+        </ul>
+        <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <p style="color: #7dd8e4; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;">The result</p>
+          <p style="color: white; font-size: 1rem; line-height: 1.6; font-weight: 400;">True passive protection — always on, always aware, never in the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="section-inner">
+    <div class="section-label">See It in Action</div>
+    <h2 class="section-title">Watch How Evolve Works</h2>
+    <p class="section-sub">A closer look at the technology behind touchless fall detection and 24/7 remote wellness support.</p>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/GWpq3wYZWoc"
+        title="Fall Detection — Vayyar Care"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <p class="video-note">Contact Metro Mobile Health Care to request a live product demo for your home or community.</p>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="audiences">
+  <div class="section-inner">
+    <div class="section-label">Who It's For</div>
+    <h2 class="section-title">The Right Solution for Every Situation</h2>
+    <p class="section-sub">Evolve serves seniors, people with disabilities, and the families and facilities that care for them.</p>
+    <div class="audience-grid">
+      <div class="audience-card seniors">
+        <div class="aud-label">For Seniors &amp; People with Disabilities</div>
+        <h3>Live Independently. Live Confidently.</h3>
+        <ul>
+          <li>No devices to remember to wear</li>
+          <li>Full privacy — no cameras ever</li>
+          <li>Help arrives without pressing a button</li>
+          <li>Support available any time, day or night</li>
+          <li>Stay in your own home longer</li>
+          <li>Dementia-friendly — works without cooperation</li>
+        </ul>
+      </div>
+      <div class="audience-card families">
+        <div class="aud-label">For Families &amp; Caregivers</div>
+        <h3>Peace of Mind. Even From a Distance.</h3>
+        <ul>
+          <li>Real-time fall alerts to your phone</li>
+          <li>Know a nurse is always watching over</li>
+          <li>Activity insights and health trend reports</li>
+          <li>Coordinated emergency response on their behalf</li>
+          <li>Reduce caregiver stress and burden</li>
+          <li>Regular wellness check-ins included</li>
+        </ul>
+      </div>
+      <div class="audience-card facilities">
+        <div class="aud-label">For Facilities &amp; Operators</div>
+        <h3>Better Outcomes. Reduced Liability.</h3>
+        <ul>
+          <li>Automated fall detection — no staff required</li>
+          <li>Reduce incident documentation burden</li>
+          <li>Predictive data to guide care planning</li>
+          <li>Attract residents with best-in-class safety</li>
+          <li>Backed by 24/7 professional monitoring team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILOT DATA -->
+<section class="pilot-section">
+  <div class="pilot-inner">
+    <div class="pilot-header">
+      <div class="section-label">Proven Results</div>
+      <h2 class="section-title">Real-World Impact from a Florida County Pilot</h2>
+      <p class="section-sub">Nine months of active deployment. These aren't estimates — they're outcomes from real seniors in real communities.</p>
+    </div>
+    <div class="pilot-stats">
+      <div class="p-stat">
+        <div class="p-stat-num">365</div>
+        <div class="p-stat-label">Seniors monitored across the deployment</div>
+      </div>
+      <div class="p-stat">
+        <div class="p-stat-num"><span>34</span></div>
+        <div class="p-stat-label">Falls detected and responded to in real time</div>
+      </div>
+      <div class="p-stat">
+        <div class="p-stat-num"><span>36</span></div>
+        <div class="p-stat-label">EMT dispatches successfully coordinated</div>
+      </div>
+      <div class="p-stat">
+        <div class="p-stat-num">700<span>+</span></div>
+        <div class="p-stat-label">Activity alerts generated over 9 months</div>
+      </div>
+    </div>
+    <p class="pilot-footnote">Data from Evolve by TLS Global Florida county pilot program. Ask Metro Mobile Health Care for the full case summary.</p>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <h2>Ready to Learn More?</h2>
+      <p>Metro Mobile Health Care brings the Evolve platform to seniors, people with disabilities, and senior living communities across the Tulsa area and beyond. Reach out to schedule a demo or ask any questions.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 5.55 5.55l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Phone</div>
+            <div class="c-val">
+              <a href="tel:9182169303">(918) 216-9303</a> &nbsp;/&nbsp;
+              <a href="tel:9188100263">(918) 810-0263</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val"><a href="mailto:metromobilehc@gmail.com">metromobilehc@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Office</div>
+            <div class="c-val">7401 Riverside Pkwy, Unit 219<br/>Tulsa, OK 74136</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Also looking at home modifications?</div>
+            <div class="c-val"><a href="aging-in-place.html">See our Aging in Place service →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-form">
+      <h3>Get in Touch</h3>
+      <p class="form-sub">Fill out the form and we'll be in touch shortly to answer your questions or schedule a demonstration.</p>
+      <form id="evolve-form">
+        <input type="hidden" name="service" value="fall-detection">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ev-first">First Name</label>
+            <input type="text" id="ev-first" name="first_name" placeholder="Jane" required/>
+          </div>
+          <div class="form-group">
+            <label for="ev-last">Last Name</label>
+            <input type="text" id="ev-last" name="last_name" placeholder="Smith" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ev-email">Email Address</label>
+          <input type="email" id="ev-email" name="email" placeholder="jane@example.com"/>
+        </div>
+        <div class="form-group">
+          <label for="ev-phone">Phone Number</label>
+          <input type="tel" id="ev-phone" name="phone" placeholder="(918) 000-0000" required/>
+        </div>
+        <div class="form-group">
+          <label for="ev-role">I am a...</label>
+          <select id="ev-role" name="role">
+            <option value="">Select your role</option>
+            <option>Senior or person with a disability</option>
+            <option>Family member or caregiver</option>
+            <option>Facility or community administrator</option>
+            <option>Healthcare provider or partner</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ev-time">Best Time to Contact</label>
+          <select id="ev-time" name="best_time">
+            <option value="">Select a time</option>
+            <option>Morning (8am – 12pm)</option>
+            <option>Afternoon (12pm – 5pm)</option>
+            <option>Evening (5pm – 7pm)</option>
+            <option>Anytime</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ev-message">Message or Questions</label>
+          <textarea id="ev-message" name="message" placeholder="Tell us about your needs or what you'd like to know about Evolve..."></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="evolve-submit-btn">Send Message →</button>
+        <span id="evolve-form-status" role="status"></span>
+      </form>
+      <p class="form-disclaimer">Your information is never shared. We'll only use it to follow up on your request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Metro Mobile Health Care</div>
+  <div class="footer-phones">
+    <a href="tel:9182169303">(918) 216-9303</a> &nbsp;·&nbsp; <a href="tel:9188100263">(918) 810-0263</a>
+  </div>
+  <div class="footer-sub">
+    Powered by <a href="https://tls.global" target="_blank">TLS Global / Tranquility Lifestyle Solutions</a> &nbsp;·&nbsp;
+    Tulsa, Oklahoma &nbsp;·&nbsp; <a href="https://www.metromobilehc.com" target="_blank">metromobilehc.com</a>
+  </div>
+</footer>
+
+<script>
+  const evolveForm = document.getElementById('evolve-form');
+  const evolveStatus = document.getElementById('evolve-form-status');
+  const evolveSubmitBtn = document.getElementById('evolve-submit-btn');
+
+  evolveForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    evolveSubmitBtn.disabled = true;
+    evolveStatus.className = '';
+    evolveStatus.textContent = 'Sending...';
+
+    const formData = new FormData(evolveForm);
+    const payload = {
+      who: 'family',
+      service: formData.get('service'),
+      name: `${formData.get('first_name') || ''} ${formData.get('last_name') || ''}`.trim(),
+      client_name: '',
+      phone: formData.get('phone'),
+      email: formData.get('email'),
+      organization: formData.get('role') || '',
+      message: `Role: ${formData.get('role') || 'n/a'} | Best time to contact: ${formData.get('best_time') || 'n/a'} | ${formData.get('message') || ''}`
+    };
+
+    try {
+      const res = await fetch('/api/referral', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Request failed');
+      evolveStatus.textContent = "Thank you — a Metro Mobile Health Care team member will be in touch shortly.";
+      evolveForm.reset();
+    } catch (err) {
+      evolveStatus.className = 'error';
+      evolveStatus.textContent = 'Something went wrong — please call (918) 216-9303 instead.';
+    } finally {
+      evolveSubmitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>

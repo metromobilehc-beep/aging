@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aging in Place — Metro Mobile Health Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plaster:#EDE6D6;
+    --plaster-dim:#E4DCC9;
+    --walnut:#4A3728;
+    --walnut-soft:#6B5644;
+    --moss:#57715F;
+    --moss-soft:#7C9A87;
+    --harbor:#2B4552;
+    --harbor-light:#3E6274;
+    --clay:#A8552E;
+    --ink:#2A2420;
+    --paper:#FAF7F0;
+    --line:#D7CDB6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Public Sans', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--plaster);
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    color:var(--walnut);
+    margin:0 0 .4em 0;
+    font-weight:600;
+    letter-spacing:-.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.02em;
+  }
+  a{color:inherit;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  .ruled{
+    position:relative;
+    border-left:2px solid var(--line);
+    padding-left:28px;
+  }
+
+  .measure{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--harbor);font-weight:600;
+    margin:10px 0 0 0;
+  }
+  .measure .tag{
+    background:var(--paper);border:1px solid var(--line);
+    padding:3px 9px;border-radius:3px;color:var(--walnut);
+  }
+
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 44px;background:var(--paper);border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:50;
+  }
+  nav .logo{font-family:'Source Serif 4',serif;font-weight:700;color:var(--walnut);font-size:19px;}
+  nav .logo span{color:var(--moss);font-weight:500;font-size:15px;display:block;font-family:'Public Sans',sans-serif;margin-top:-2px;}
+  nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0;font-size:14px;font-weight:600;}
+  nav a{text-decoration:none;color:var(--walnut-soft);}
+  nav li.active a{color:var(--clay);}
+  @media (max-width:880px){ nav ul{display:none;} }
+
+  .hero{
+    background:var(--walnut);color:var(--plaster);
+    padding:100px 44px 80px;position:relative;overflow:hidden;
+  }
+  .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:2;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--moss-soft);
+    text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px;
+  }
+  .hero h1{color:var(--paper);font-size:44px;max-width:720px;margin:0 0 20px 0;line-height:1.15;}
+  .hero p{max-width:560px;font-size:18px;color:#DCD3BE;margin:0 0 32px 0;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    display:inline-block;background:var(--clay);color:#fff;
+    padding:15px 28px;border-radius:3px;text-decoration:none;
+    font-weight:700;font-size:15px;border:none;cursor:pointer;
+    font-family:'Public Sans',sans-serif;
+  }
+  .btn:hover{background:#8F461F;}
+  .btn-outline{
+    display:inline-block;background:transparent;color:var(--paper);
+    padding:14px 26px;border-radius:3px;text-decoration:none;
+    font-weight:700;font-size:15px;border:1.5px solid #7D6A56;
+  }
+  @media (max-width:900px){ .hero h1{font-size:34px;} }
+
+  section{padding:76px 44px;max-width:960px;margin:0 auto;}
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--moss);
+    text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;font-weight:600;
+  }
+  section h2{font-size:30px;max-width:640px;}
+  .lede{max-width:640px;font-size:17px;color:var(--walnut-soft);}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:36px;
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--paper);}
+  @media (max-width:720px){ .compare{grid-template-columns:1fr;} }
+  .compare-col{padding:32px;}
+  .compare-col.us{background:#F1EEE2;border-left:3px solid var(--moss);}
+  @media (max-width:720px){ .compare-col.us{border-left:none;border-top:3px solid var(--moss);} }
+  .compare-col h3{font-size:18px;margin-bottom:16px;}
+  .compare-col ul{padding-left:20px;margin:0;font-size:15px;color:var(--walnut-soft);}
+  .compare-col li{margin-bottom:12px;}
+  .compare-col.us li{color:var(--ink);}
+
+  .credibility{background:var(--harbor);color:var(--paper);border-radius:8px;padding:48px;margin-top:20px;}
+  .credibility h2{color:var(--paper);}
+  .credibility .lede{color:#C9DAE0;}
+  .cred-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px;}
+  @media (max-width:700px){ .cred-grid{grid-template-columns:1fr;} }
+  .cred-item .mono{color:var(--moss-soft);display:block;margin-bottom:6px;}
+  .cred-item p{margin:0;font-size:15px;color:#DCE7EA;}
+
+  .process-list{margin-top:32px;}
+  .process-item{
+    display:grid;grid-template-columns:70px 1fr;gap:20px;
+    padding:26px 0;border-top:1px solid var(--line);
+  }
+  .process-item:last-child{border-bottom:1px solid var(--line);}
+  .process-num{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--clay);font-weight:600;padding-top:2px;}
+  .process-item h3{font-size:19px;margin-bottom:6px;}
+  .process-item p{margin:0 0 8px 0;color:var(--walnut-soft);font-size:15px;}
+
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:32px;
+    background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+  @media (max-width:700px){ .services-grid{grid-template-columns:1fr;} }
+  .service-card{background:var(--paper);padding:26px 28px;}
+  .service-card h4{margin:0 0 8px 0;font-size:16px;font-weight:700;color:var(--walnut);font-family:'Source Serif 4',serif;}
+  .service-card p{margin:0 0 10px 0;font-size:14.5px;color:var(--walnut-soft);}
+
+  .pricing-grid{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;}
+  .price-card{flex:1;min-width:260px;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:32px;}
+  .price-card.featured{border:1.5px solid var(--clay);position:relative;}
+  .price-card.featured::before{
+    content:"MOST BOOKED";position:absolute;top:-11px;left:24px;
+    background:var(--clay);color:#fff;font-size:10.5px;font-weight:700;
+    padding:4px 10px;border-radius:3px;letter-spacing:.08em;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .price-card h3{font-size:18px;margin-bottom:6px;}
+  .price-card .price{font-family:'Source Serif 4',serif;font-size:34px;color:var(--clay);margin:10px 0;font-weight:600;}
+  .price-card .price span{font-size:14px;color:var(--walnut-soft);font-weight:400;font-family:'Public Sans',sans-serif;}
+  .price-card ul{padding-left:18px;font-size:14.5px;color:var(--walnut-soft);margin:16px 0 0 0;}
+  .price-card li{margin-bottom:7px;}
+
+  .referral{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:44px;margin-top:24px;}
+  .who-toggle{display:flex;gap:10px;margin-bottom:26px;flex-wrap:wrap;}
+  .who-btn{
+    padding:10px 18px;border-radius:20px;border:1.5px solid var(--line);
+    background:var(--plaster);font-size:14px;font-weight:600;cursor:pointer;
+    color:var(--walnut-soft);font-family:'Public Sans',sans-serif;
+  }
+  .who-btn.active{background:var(--moss);border-color:var(--moss);color:#fff;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+  .form-grid .full{grid-column:1/-1;}
+  label{display:block;font-size:13px;font-weight:600;color:var(--walnut-soft);margin-bottom:6px;}
+  input,textarea,select{
+    width:100%;padding:12px;border:1px solid var(--line);border-radius:4px;
+    font-family:'Public Sans',sans-serif;font-size:15px;background:#fff;color:var(--ink);
+  }
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--harbor);outline-offset:1px;}
+  .form-submit{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  #form-status{font-size:14px;color:var(--moss);font-weight:600;}
+  #form-status.error{color:var(--clay);}
+
+  .faq details{border-bottom:1px solid var(--line);padding:18px 0;}
+  .faq summary{font-family:'Source Serif 4',serif;font-weight:600;cursor:pointer;color:var(--walnut);font-size:16.5px;}
+  .faq p{margin:12px 0 0 0;color:var(--walnut-soft);font-size:15px;}
+
+  .sticky-cta{
+    display:none;position:fixed;bottom:0;left:0;right:0;background:var(--walnut);
+    padding:13px 20px;text-align:center;z-index:100;
+  }
+  .sticky-cta a{color:var(--plaster);font-weight:700;text-decoration:none;}
+  @media (max-width:700px){ .sticky-cta{display:block;} body{padding-bottom:58px;} }
+
+  footer{background:var(--ink);color:#A99C87;text-align:center;padding:30px;font-size:13px;}
+  footer a{color:#CFC4AC;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Metro Mobile Health Care<span>Aging in Place</span></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#compare">Why Us</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li class="active"><a href="#referral">Refer a Client</a></li>
+    <li><a href="fall-detection.html">Fall Detection →</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Home Safety Assessment · Tulsa Metro</div>
+    <h1>A grab bar installed in the wrong spot is worse than no grab bar at all.</h1>
+    <p>We're the home health therapy team already trusted across the Tulsa metro — and we measure a home the way a clinician measures a patient, before anyone picks up a drill.</p>
+    <div class="hero-ctas">
+      <a class="btn" href="#referral">Book an Assessment — $299</a>
+      <a class="btn-outline" href="tel:9182169303">Call (918) 216-9303</a>
+    </div>
+  </div>
+</div>
+
+<section id="compare">
+  <div class="section-label">The Difference</div>
+  <h2>Why this isn't just a contractor visit</h2>
+  <p class="lede">Anyone can sell you a ramp. Very few of the people selling one have watched your parent actually try to stand up from that specific chair, in that specific bathroom, on that specific bad knee.</p>
+  <div class="compare">
+    <div class="compare-col">
+      <h3>A general contractor</h3>
+      <ul>
+        <li>Quotes off a catalog of standard fixtures</li>
+        <li>Measures the room, not the person using it</li>
+        <li>Has no way to know which changes actually reduce fall risk vs. which just look safer</li>
+        <li>Moves on once the install is done</li>
+      </ul>
+    </div>
+    <div class="compare-col us">
+      <h3>Our licensed PT/OT team</h3>
+      <ul>
+        <li>Evaluates balance, gait, grip strength, and daily routines in the actual home</li>
+        <li>Recommends changes based on how this specific person moves — not a generic checklist</li>
+        <li>Is the same clinical team already providing in-home therapy visits across Tulsa</li>
+        <li>Can follow up through ongoing therapy or fall-monitoring, not a one-time transaction</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="credibility">
+    <div class="section-label" style="color:var(--moss-soft);">Standing In The Community</div>
+    <h2>Backed by a name Tulsa home health already trusts</h2>
+    <p class="lede">Metro Mobile Health Care has been placing licensed physical and occupational therapists into homes across the Tulsa metro for years, working alongside the area's home health agencies. This service line runs through the same clinical team — not a separate contractor brand borrowing our name.</p>
+    <div class="cred-grid">
+      <div class="cred-item">
+        <span class="mono">Clinical staff</span>
+        <p>Licensed PT and OT clinicians — the same team already doing in-home therapy visits, not subcontracted evaluators.</p>
+      </div>
+      <div class="cred-item">
+        <span class="mono">Referral network</span>
+        <p>Trusted by case managers and discharge planners at partner home health agencies across the metro.</p>
+      </div>
+      <div class="cred-item">
+        <span class="mono">Local, not national</span>
+        <p>Tulsa-based and Tulsa-run — the same team you can call again next year, not a franchise call center.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-label">How It Works</div>
+  <h2>Three steps, in order — because skipping one costs money</h2>
+  <div class="process-list">
+    <div class="process-item">
+      <div class="process-num">01</div>
+      <div>
+        <h3>Clinical evaluation</h3>
+        <p>A physical or occupational therapist walks the home with you, evaluating mobility, balance, and daily function room by room — not just measuring doorframes.</p>
+        <div class="measure"><span class="tag mono">$299 flat</span> scheduled within a week</div>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-num">02</div>
+      <div>
+        <h3>Coordinated planning</h3>
+        <p>We translate the evaluation into a written, itemized quote with our contractor partner — prioritized by what actually reduces risk, not what's most profitable to install.</p>
+        <div class="measure"><span class="tag mono">no obligation</span> to proceed</div>
+      </div>
+    </div>
+    <div class="process-item">
+      <div class="process-num">03</div>
+      <div>
+        <h3>Installation &amp; sign-off</h3>
+        <p>Our contractor partner, Grab Bars of Tulsa, completes the work. Then the same therapist checks it against the original evaluation before we call it done.</p>
+        <div class="measure"><span class="tag mono">2 days–2 months</span> depending on scope</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-label">Services</div>
+  <h2>What we assess and install</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h4>Grab Bars &amp; Handrails</h4>
+      <p>Anchored into studs, placed where a therapist has watched someone actually reach, sit, and stand.</p>
+      <div class="measure mono" style="color:var(--moss);">1.25–1.5 in diameter, ADA-standard grip</div>
+    </div>
+    <div class="service-card">
+      <h4>Doorway Widening</h4>
+      <p>For walkers and wheelchairs to clear thresholds without catching or tipping.</p>
+      <div class="measure mono" style="color:var(--moss);">32 in minimum clear width</div>
+    </div>
+    <div class="service-card">
+      <h4>Ramp Construction</h4>
+      <p>Code-compliant slope and landings, built for the specific entrance and Oklahoma weather.</p>
+      <div class="measure mono" style="color:var(--moss);">1:12 slope ratio</div>
+    </div>
+    <div class="service-card">
+      <h4>Bathroom Conversions</h4>
+      <p>Walk-in showers, raised toilets, and non-slip surfaces — where falls happen most often.</p>
+      <div class="measure mono" style="color:var(--moss);">17–19 in seat height</div>
+    </div>
+    <div class="service-card">
+      <h4>Flooring &amp; Threshold Repair</h4>
+      <p>Removing trip hazards — loose transitions, thick rugs, uneven thresholds between rooms.</p>
+      <div class="measure mono" style="color:var(--moss);">under 0.5 in rise</div>
+    </div>
+    <div class="service-card">
+      <h4>Custom Safety Solutions</h4>
+      <p>Every home is different; we scope one-off fixes a general contractor wouldn't think to flag.</p>
+      <div class="measure mono" style="color:var(--moss);">case-by-case</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2>Simple, transparent — no catalog upsell</h2>
+  <div class="pricing-grid">
+    <div class="price-card featured">
+      <h3>Home Safety Assessment</h3>
+      <div class="price">$299 <span>flat rate</span></div>
+      <ul>
+        <li>In-home evaluation by a licensed PT or OT</li>
+        <li>Written report with prioritized recommendations</li>
+        <li>Itemized quote from our contractor partner</li>
+        <li>No obligation to move forward</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <h3>Modifications &amp; Renovations</h3>
+      <div class="price">Quoted <span>per project</span></div>
+      <ul>
+        <li>Priced from your assessment, not a generic catalog</li>
+        <li>Grab bars typically same-week</li>
+        <li>Larger projects: 2 weeks to 2 months</li>
+        <li>Private pay — no insurance delays</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="referral">
+  <div class="section-label">Get Started</div>
+  <h2>Book an assessment, or refer a client</h2>
+  <p class="lede">Family member arranging care for a parent, or a case manager referring a patient — either way, this goes straight to our team.</p>
+  <div class="referral">
+    <div class="who-toggle" role="group" aria-label="Who is this referral from">
+      <button type="button" class="who-btn active" data-who="family">I'm a family member</button>
+      <button type="button" class="who-btn" data-who="self">I'm the client</button>
+      <button type="button" class="who-btn" data-who="professional">I'm a healthcare professional</button>
+    </div>
+    <form id="referral-form">
+      <input type="hidden" id="who" name="who" value="family">
+      <input type="hidden" name="service" value="aging-in-place">
+      <div class="form-grid">
+        <div>
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="client_name" id="client_name_label">Name of the person needing an assessment</label>
+          <input type="text" id="client_name" name="client_name">
+        </div>
+        <div>
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="full" id="org-field" style="display:none;">
+          <label for="organization">Organization / agency</label>
+          <input type="text" id="organization" name="organization">
+        </div>
+        <div class="full">
+          <label for="message">What's going on — any details help</label>
+          <textarea id="message" name="message" rows="4" placeholder="Address, mobility concerns, timeline, anything you'd tell us on the phone..."></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn" id="submit-btn">Send Referral</button>
+        <span id="form-status" role="status"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="section-label">Questions</div>
+  <h2>Frequently asked</h2>
+  <details>
+    <summary>What is a home safety assessment?</summary>
+    <p>An in-home evaluation performed by a physical or occupational therapist to identify ways to make your home safer and easier to navigate as you age.</p>
+  </details>
+  <details>
+    <summary>Do I need a doctor's referral?</summary>
+    <p>No. This is direct access, private pay — no physician referral required.</p>
+  </details>
+  <details>
+    <summary>Is this covered by insurance?</summary>
+    <p>The therapy evaluation may be billable in some cases, but modifications and renovations are private pay.</p>
+  </details>
+  <details>
+    <summary>How much does a project cost?</summary>
+    <p>The assessment itself is a flat $299. Modifications depend on your needs, materials, and home construction — we quote based on your actual situation after the evaluation.</p>
+  </details>
+  <details>
+    <summary>How long does a project take?</summary>
+    <p>A single grab bar can be done quickly; larger projects like ramps or bathroom conversions may take two weeks to two months.</p>
+  </details>
+  <details>
+    <summary>Do you serve areas outside Tulsa?</summary>
+    <p>Yes, generally within 50 miles of the greater Tulsa metro area.</p>
+  </details>
+  <details>
+    <summary>Who actually does the evaluation?</summary>
+    <p>A licensed physical or occupational therapist from our clinical team — the same clinicians who provide home health therapy visits.</p>
+  </details>
+  <details>
+    <summary>Who does the actual construction work?</summary>
+    <p>Our contractor partner, Grab Bars of Tulsa, handles installation. We stay involved to make sure the finished work matches the clinical recommendations.</p>
+  </details>
+  <details>
+    <summary>I'm a case manager — can I refer a patient directly?</summary>
+    <p>Yes — use the form above and select "I'm a healthcare professional." Include the agency name and we'll follow up directly with you or the family.</p>
+  </details>
+  <details>
+    <summary>Can this work alongside fall monitoring?</summary>
+    <p>Yes. Many families pair a home safety assessment with our fall detection and remote monitoring services for a more complete safety plan.</p>
+  </details>
+</section>
+
+<div class="sticky-cta">
+  <a href="tel:9182169303">Call (918) 216-9303 to schedule your assessment →</a>
+</div>
+
+<footer>
+  © 2026 Metro Mobile Health Care — Aging in Place · Tulsa, OK · (918) 216-9303
+</footer>
+
+<script>
+  const whoButtons = document.querySelectorAll('.who-btn');
+  const whoField = document.getElementById('who');
+  const orgField = document.getElementById('org-field');
+  const clientLabel = document.getElementById('client_name_label');
+  const clientInput = document.getElementById('client_name');
+
+  whoButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      whoButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const who = btn.dataset.who;
+      whoField.value = who;
+      orgField.style.display = who === 'professional' ? 'block' : 'none';
+      if (who === 'self') {
+        clientLabel.textContent = 'Your name (again, for our records)';
+        clientInput.required = false;
+      } else {
+        clientLabel.textContent = 'Name of the person needing an assessment';
+      }
+    });
+  });
+
+  const form = document.getElementById('referral-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    statusEl.className = '';
+    statusEl.textContent = 'Sending...';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/referral', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Request failed');
+      statusEl.textContent = 'Sent — we\'ll be in touch shortly.';
+      form.reset();
+    } catch (err) {
+      statusEl.className = 'error';
+      statusEl.textContent = 'Something went wrong — please call (918) 216-9303 instead.';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
