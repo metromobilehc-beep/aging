@@ -149,6 +149,24 @@
     .section-sub { font-size: 1.05rem; color: var(--gray-500); font-weight: 400; max-width: 580px; }
 
     /* ── WHY CHOOSE US ── */
+    /* ── RESPONSE TIME ── */
+    .response-section { background: var(--white); }
+    .response-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 44px; }
+    .r-stat { background: var(--gray-100); border-radius: var(--radius); padding: 26px 20px; text-align: center; }
+    .r-stat-num { font-family: 'DM Serif Display', serif; font-size: 2.1rem; color: var(--navy); line-height: 1; }
+    .r-stat-num span { color: var(--orange); }
+    .r-stat-label { font-size: 0.82rem; color: var(--gray-500); margin-top: 8px; line-height: 1.4; }
+    .response-note { margin-top: 18px; font-size: 0.85rem; color: var(--gray-500); text-align: center; }
+    .response-flow { margin-top: 56px; }
+    .flow-steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+    .flow-step { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 20px 0; border-top: 1px solid var(--gray-200); }
+    .flow-step:last-child { border-bottom: 1px solid var(--gray-200); }
+    .flow-num { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--teal); }
+    .flow-step h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .flow-step p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.6; }
+    @media (max-width: 860px) { .response-stats { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .response-stats { grid-template-columns: 1fr; } }
+
     .why-section { background: var(--teal-light); }
     .why-grid {
       display: grid; grid-template-columns: repeat(5, 1fr);
@@ -437,6 +455,76 @@
     Metro Mobile Health Care is your local Tulsa-area partner for Evolve — offering a no-cost in-home consultation and evaluation to see if Evolve is right for your family.
   </div>
 </div>
+
+<!-- WHY RESPONSE TIME MATTERS -->
+<section class="response-section">
+  <div class="section-inner">
+    <div class="section-label">Why Response Time Matters</div>
+    <h2 class="section-title">The Fall Is Only Part of the Story</h2>
+    <p class="section-sub">Falls are common — but what happens in the minutes and hours afterward is often what determines the outcome. When no one is there to respond, a manageable fall can turn into a much longer, harder recovery.</p>
+    <div class="response-stats">
+      <div class="r-stat">
+        <div class="r-stat-num">1 in <span>4</span></div>
+        <div class="r-stat-label">Adults 65+ fall each year — over 36 million falls annually in the U.S. (CDC)</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-stat-num">~<span>80%</span></div>
+        <div class="r-stat-label">Of falls happen in the bathroom or living room, often during routine movement</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-stat-num">~<span>50%</span></div>
+        <div class="r-stat-label">Of older adults who fall are unable to get back up without help</div>
+      </div>
+      <div class="r-stat">
+        <div class="r-stat-num">53<span>M+</span></div>
+        <div class="r-stat-label">Americans provide unpaid care for a loved one — often while working and raising a family of their own</div>
+      </div>
+    </div>
+    <p class="response-note">Longer time spent on the floor after a fall is strongly linked to higher rates of hospitalization and complications — which is exactly the gap continuous monitoring is designed to close.</p>
+
+    <div class="response-flow">
+      <div class="section-label">How Evolve Responds</div>
+      <h3 class="section-title" style="font-size:1.6rem;">From Detection to Resolution — Without Anyone Needing to Press a Button</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div>
+            <h4>Private, passive detection</h4>
+            <p>Nobi smart lighting and Vayyar radar sensors identify a fall automatically — no cameras, microphones, or buttons required.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div>
+            <h4>Immediate notification</h4>
+            <p>The event reaches Evolve's monitoring team within minutes, and a trained wellness professional is alerted right away.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div>
+            <h4>Real-time check-in</h4>
+            <p>A team member speaks with your loved one directly to understand what happened and how they're doing.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div>
+            <h4>Family notified</h4>
+            <p>If needed, you're contacted quickly so you stay informed and involved — without having to be the first responder yourself.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <div>
+            <h4>Emergency coordination</h4>
+            <p>If urgent care is required, emergency services are contacted without delay.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- WHY CHOOSE US -->
 <section class="why-section">
