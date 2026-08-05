@@ -118,6 +118,60 @@
   .intro p{color:var(--walnut-soft);font-size:17px;}
 
   /* ---- picker ---- */
+  /* ---- quiz widget ---- */
+  .quiz-wrap{max-width:680px;margin:0 auto 50px;padding:0 44px;}
+  .quiz-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:36px 38px;}
+  .quiz-toggle-row{text-align:center;}
+  .quiz-start-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--paper);
+    border:1.5px solid var(--brand-teal);color:var(--brand-deep);
+    padding:14px 26px;border-radius:6px;font-weight:700;font-size:15px;cursor:pointer;
+    font-family:'Public Sans',sans-serif;
+  }
+  .quiz-start-btn:hover{background:var(--plaster-dim,#E4DCC9);}
+  .quiz-title{font-size:20px;margin-bottom:6px;}
+  .quiz-progress{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss);margin-bottom:18px;}
+  .quiz-question{display:none;}
+  .quiz-question.active{display:block;}
+  .quiz-question h3{font-size:17px;margin-bottom:16px;color:var(--walnut);}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;}
+  .quiz-opt{
+    display:block;padding:13px 16px;border:1.5px solid var(--line);border-radius:6px;
+    cursor:pointer;font-size:15px;color:var(--walnut-soft);transition:border-color .15s,background .15s;
+  }
+  .quiz-opt:hover{border-color:var(--brand-teal);}
+  .quiz-opt input{margin-right:10px;}
+  .quiz-opt.selected{border-color:var(--brand-teal);background:#F2FBFA;}
+  .quiz-nav{display:flex;justify-content:space-between;margin-top:24px;}
+  .quiz-back{background:none;border:none;color:var(--walnut-soft);font-weight:600;cursor:pointer;font-size:14px;font-family:'Public Sans',sans-serif;}
+  .quiz-next{
+    background:var(--brand-deep);color:#fff;border:none;padding:11px 24px;
+    border-radius:6px;font-weight:700;cursor:pointer;font-size:14px;font-family:'Public Sans',sans-serif;
+  }
+  .quiz-next:disabled{opacity:.4;cursor:not-allowed;}
+  .quiz-result{display:none;}
+  .quiz-result.active{display:block;}
+  .quiz-result .tag2{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+  .quiz-result h3{font-size:22px;margin-bottom:10px;}
+  .quiz-result p{color:var(--walnut-soft);font-size:15px;margin-bottom:20px;}
+  .quiz-result-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+  .quiz-result-go{
+    background:var(--brand-orange);color:#fff;padding:13px 24px;border-radius:6px;
+    font-weight:700;font-size:14.5px;text-decoration:none;
+  }
+  .quiz-followup{border-top:1px solid var(--line);padding-top:20px;}
+  .quiz-followup p{font-size:13.5px;color:var(--walnut-soft);margin-bottom:12px;}
+  .quiz-followup-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .quiz-followup-form input{
+    flex:1;min-width:140px;padding:11px 14px;border:1px solid var(--line);border-radius:5px;
+    font-family:'Public Sans',sans-serif;font-size:14px;
+  }
+  .quiz-followup-form button{
+    background:var(--brand-teal);color:#fff;border:none;padding:11px 20px;
+    border-radius:5px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Public Sans',sans-serif;
+  }
+  #quiz-followup-status{font-size:13px;color:var(--moss);font-weight:600;margin-top:8px;display:block;}
+
   .picker{
     max-width:1080px;margin:0 auto;padding:20px 44px 90px;
     display:grid;grid-template-columns:1fr 1fr;gap:28px;
@@ -215,6 +269,85 @@
   <p>Same clinical team behind both services below — pick the one that fits what you need right now, or call and we'll help you sort it out.</p>
 </div>
 
+<div class="quiz-wrap">
+  <div class="quiz-card">
+    <div class="quiz-toggle-row" id="quiz-toggle-row">
+      <p style="color:var(--walnut-soft);margin-bottom:16px;font-size:15px;">Not sure which one you need? A 4-question check can point you in the right direction.</p>
+      <button type="button" class="quiz-start-btn" id="quiz-start-btn">Not sure? Take a quick 4-question check →</button>
+    </div>
+
+    <div id="quiz-body" style="display:none;">
+      <div class="quiz-title">Which one fits right now?</div>
+      <div class="quiz-progress" id="quiz-progress">Question 1 of 4</div>
+
+      <form id="quiz-form">
+        <div class="quiz-question active" data-q="1">
+          <h3>Has your loved one fallen in the past year?</h3>
+          <div class="quiz-options">
+            <label class="quiz-opt"><input type="radio" name="q1" value="fall2"> Yes, at least once</label>
+            <label class="quiz-opt"><input type="radio" name="q1" value="fall1"> Not that we know of, but we're not always around</label>
+            <label class="quiz-opt"><input type="radio" name="q1" value="fall0"> No</label>
+          </div>
+        </div>
+
+        <div class="quiz-question" data-q="2">
+          <h3>Do they have trouble with stairs, the shower, or standing up from chairs?</h3>
+          <div class="quiz-options">
+            <label class="quiz-opt"><input type="radio" name="q2" value="aging2"> Yes, regularly</label>
+            <label class="quiz-opt"><input type="radio" name="q2" value="aging1"> Sometimes</label>
+            <label class="quiz-opt"><input type="radio" name="q2" value="aging0"> Rarely or never</label>
+          </div>
+        </div>
+
+        <div class="quiz-question" data-q="3">
+          <h3>Do they live alone or spend a lot of time alone during the day?</h3>
+          <div class="quiz-options">
+            <label class="quiz-opt"><input type="radio" name="q3" value="fall2"> Yes</label>
+            <label class="quiz-opt"><input type="radio" name="q3" value="fall1"> Sometimes</label>
+            <label class="quiz-opt"><input type="radio" name="q3" value="fall0"> No, someone's usually around</label>
+          </div>
+        </div>
+
+        <div class="quiz-question" data-q="4">
+          <h3>What worries you more?</h3>
+          <div class="quiz-options">
+            <label class="quiz-opt"><input type="radio" name="q4" value="aging2"> The home itself — stairs, the bathroom, tight doorways</label>
+            <label class="quiz-opt"><input type="radio" name="q4" value="fall2"> Knowing quickly if something happens when no one's there</label>
+            <label class="quiz-opt"><input type="radio" name="q4" value="both1"> Honestly, both concern me equally</label>
+          </div>
+        </div>
+      </form>
+
+      <div class="quiz-nav">
+        <button type="button" class="quiz-back" id="quiz-back" style="visibility:hidden;">← Back</button>
+        <button type="button" class="quiz-next" id="quiz-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="quiz-result" id="quiz-result">
+      <div class="tag2" id="quiz-result-tag">Your Result</div>
+      <h3 id="quiz-result-title"></h3>
+      <p id="quiz-result-copy"></p>
+      <div class="quiz-result-actions">
+        <a href="#" class="quiz-result-go" id="quiz-result-go">See the recommended service →</a>
+        <a href="tel:9182169303" class="btn-outline" style="border-color:var(--line);color:var(--walnut-soft);padding:13px 24px;border-radius:6px;font-size:14.5px;font-weight:700;">Call (918) 216-9303</a>
+      </div>
+      <div class="quiz-followup">
+        <p>Prefer we just call you instead? Leave your number and we'll reach out with next steps.</p>
+        <form id="quiz-followup-form">
+          <input type="hidden" id="quiz-followup-result" name="quiz_result">
+          <div class="quiz-followup-form">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="tel" name="phone" placeholder="Phone number" required>
+            <button type="submit">Request a call</button>
+          </div>
+        </form>
+        <span id="quiz-followup-status"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="picker">
   <div class="option aging">
     <div class="option-banner">
@@ -262,6 +395,141 @@
 <footer>
   © 2026 Metro Mobile Health Care · Tulsa, OK · (918) 216-9303
 </footer>
+
+<script>
+  (function(){
+    const startBtn = document.getElementById('quiz-start-btn');
+    const toggleRow = document.getElementById('quiz-toggle-row');
+    const body = document.getElementById('quiz-body');
+    const questions = Array.from(document.querySelectorAll('.quiz-question'));
+    const progress = document.getElementById('quiz-progress');
+    const nextBtn = document.getElementById('quiz-next');
+    const backBtn = document.getElementById('quiz-back');
+    const result = document.getElementById('quiz-result');
+    let current = 0;
+    const answers = {};
+
+    startBtn.addEventListener('click', () => {
+      toggleRow.style.display = 'none';
+      body.style.display = 'block';
+    });
+
+    function showQuestion(i){
+      questions.forEach((q, idx) => q.classList.toggle('active', idx === i));
+      progress.textContent = `Question ${i+1} of ${questions.length}`;
+      backBtn.style.visibility = i === 0 ? 'hidden' : 'visible';
+      updateNextState();
+    }
+
+    function updateNextState(){
+      const qName = 'q' + (current+1);
+      nextBtn.disabled = !answers[qName];
+      nextBtn.textContent = current === questions.length - 1 ? 'See my result →' : 'Next →';
+    }
+
+    document.querySelectorAll('.quiz-opt input').forEach(input => {
+      input.addEventListener('change', () => {
+        answers[input.name] = input.value;
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(i => {
+          i.closest('.quiz-opt').classList.toggle('selected', i.checked);
+        });
+        updateNextState();
+      });
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (current > 0){ current--; showQuestion(current); }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (current < questions.length - 1){
+        current++;
+        showQuestion(current);
+      } else {
+        finishQuiz();
+      }
+    });
+
+    function finishQuiz(){
+      let agingScore = 0, fallScore = 0;
+      Object.values(answers).forEach(v => {
+        if (v.startsWith('aging')) agingScore += parseInt(v.replace('aging',''));
+        if (v.startsWith('fall')) fallScore += parseInt(v.replace('fall',''));
+        if (v.startsWith('both')) { agingScore += parseInt(v.replace('both','')); fallScore += parseInt(v.replace('both','')); }
+      });
+
+      let key, title, copy, goHref, goText;
+      if (Math.abs(agingScore - fallScore) <= 1 && (agingScore + fallScore) > 0){
+        key = 'both';
+        title = "Both could genuinely help here";
+        copy = "Based on your answers, this sounds like a case where a home safety assessment and fall monitoring would work well together — one addresses the physical home, the other covers the moments no one's watching.";
+        goHref = 'aging-in-place.html'; goText = 'Start with Aging in Place →';
+      } else if (agingScore > fallScore){
+        key = 'aging';
+        title = "An Aging in Place assessment looks like the right start";
+        copy = "Your answers point more toward physical changes in the home — grab bars, doorway width, bathroom safety. A licensed PT/OT evaluation is the right next step.";
+        goHref = 'aging-in-place.html'; goText = 'See Aging in Place →';
+      } else {
+        key = 'fall';
+        title = "Fall Detection & Monitoring looks like the right start";
+        copy = "Your answers point more toward the risk of something happening when no one's around. 24/7 monitoring with real-time response is built for exactly this.";
+        goHref = 'fall-detection.html'; goText = 'See Fall Detection →';
+      }
+
+      document.getElementById('quiz-result-title').textContent = title;
+      document.getElementById('quiz-result-copy').textContent = copy;
+      const goEl = document.getElementById('quiz-result-go');
+      goEl.href = goHref;
+      goEl.textContent = goText;
+      document.getElementById('quiz-followup-result').value = key;
+
+      body.style.display = 'none';
+      result.classList.add('active');
+    }
+
+    // Optional follow-up capture — reuses the same referral backend, tagged as a quiz lead
+    const followupForm = document.getElementById('quiz-followup-form');
+    const followupStatus = document.getElementById('quiz-followup-status');
+    followupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = followupForm.querySelector('button');
+      submitBtn.disabled = true;
+      followupStatus.textContent = 'Sending...';
+
+      const formData = new FormData(followupForm);
+      const quizResult = formData.get('quiz_result');
+      const resultLabel = { aging: 'Aging in Place', fall: 'Fall Detection', both: 'Both services' }[quizResult] || 'Unclear';
+
+      const payload = {
+        who: 'family',
+        service: quizResult === 'fall' ? 'fall-detection' : 'aging-in-place',
+        name: formData.get('name'),
+        client_name: '',
+        phone: formData.get('phone'),
+        email: '',
+        organization: '',
+        message: `Submitted via homepage quiz. Quiz recommendation: ${resultLabel}.`
+      };
+
+      try {
+        const res = await fetch('/api/referral', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('failed');
+        followupStatus.textContent = "Got it — we'll call you soon.";
+        followupForm.reset();
+      } catch (err) {
+        followupStatus.textContent = 'Something went wrong — please call (918) 216-9303 instead.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    showQuestion(0);
+  })();
+</script>
 
 </body>
 </html>
