@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Family Assessment — Metro Mobile Healthcare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plaster:#F2F7F6;
+    --walnut:#154C47;
+    --walnut-soft:#3D6B66;
+    --moss:#2E8583;
+    --moss-soft:#47B9B7;
+    --harbor:#154C47;
+    --clay:#F44B1A;
+    --ink:#16302D;
+    --paper:#FFFFFF;
+    --line:#D7E8E6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Public Sans', Arial, sans-serif;color:var(--ink);
+    background:var(--plaster);line-height:1.65;
+  }
+  h1,h2{font-family:'Source Serif 4', Georgia, serif;color:var(--walnut);margin:0 0 .4em 0;font-weight:600;}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 44px;background:var(--paper);border-bottom:1px solid var(--line);
+  }
+  .logo img{height:34px;width:auto;display:block;}
+  nav a.back{font-size:14px;font-weight:600;color:var(--walnut-soft);text-decoration:none;}
+
+  .wrap{max-width:640px;margin:0 auto;padding:70px 24px 90px;}
+
+  /* ---- gate ---- */
+  .gate-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:44px;text-align:center;}
+  .gate-card .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;}
+  .gate-card h1{font-size:26px;margin-bottom:12px;}
+  .gate-card p{color:var(--walnut-soft);font-size:15px;margin-bottom:28px;}
+  #gate-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  #gate-code{
+    padding:13px 16px;border:1.5px solid var(--line);border-radius:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:16px;letter-spacing:.08em;
+    text-align:center;width:180px;text-transform:uppercase;
+  }
+  #gate-code:focus{outline:2px solid var(--moss);}
+  #gate-submit{
+    background:var(--walnut);color:#fff;border:none;padding:13px 26px;
+    border-radius:6px;font-weight:700;cursor:pointer;font-size:15px;font-family:'Public Sans',sans-serif;
+  }
+  #gate-error{color:var(--clay);font-size:14px;margin-top:14px;display:block;min-height:20px;font-weight:600;}
+  .gate-help{margin-top:24px;font-size:13.5px;color:var(--walnut-soft);}
+  .gate-help a{color:var(--moss);font-weight:700;text-decoration:underline;}
+
+  /* ---- assessment form ---- */
+  #assessment{display:none;}
+  #assessment .intro{margin-bottom:30px;}
+  #assessment .intro h1{font-size:26px;}
+  #assessment .intro p{color:var(--walnut-soft);font-size:15px;}
+  .a-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:36px;}
+  .a-section{margin-bottom:28px;}
+  .a-section:last-child{margin-bottom:0;}
+  .a-section label{display:block;font-size:13.5px;font-weight:700;color:var(--walnut);margin-bottom:8px;}
+  .a-section .sub{font-weight:400;color:var(--walnut-soft);font-size:13px;margin-top:-4px;margin-bottom:10px;}
+  .a-section input[type="text"], .a-section input[type="tel"], .a-section input[type="email"], .a-section textarea, .a-section select{
+    width:100%;padding:12px;border:1px solid var(--line);border-radius:5px;
+    font-family:'Public Sans',sans-serif;font-size:15px;background:#fff;color:var(--ink);
+  }
+  .a-section textarea{resize:vertical;min-height:80px;}
+  .radio-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .radio-opt{
+    padding:10px 16px;border:1.5px solid var(--line);border-radius:20px;
+    font-size:14px;color:var(--walnut-soft);cursor:pointer;background:var(--plaster);
+  }
+  .radio-opt input{margin-right:6px;}
+  .checkbox-row{display:flex;flex-direction:column;gap:8px;}
+  .checkbox-opt{font-size:14.5px;color:var(--walnut-soft);display:flex;align-items:center;gap:8px;}
+  .a-submit{
+    width:100%;background:var(--clay);color:#fff;border:none;padding:15px;
+    border-radius:6px;font-weight:700;font-size:15.5px;cursor:pointer;margin-top:10px;font-family:'Public Sans',sans-serif;
+  }
+  .a-submit:disabled{opacity:.6;cursor:not-allowed;}
+  #assessment-status{display:block;text-align:center;margin-top:14px;font-size:14px;font-weight:600;color:var(--moss);min-height:20px;}
+  #assessment-status.error{color:var(--clay);}
+  .a-disclaimer{font-size:12.5px;color:var(--walnut-soft);text-align:center;margin-top:16px;}
+
+  footer{background:var(--ink);color:#A99C87;text-align:center;padding:26px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <a href="index.html" aria-label="Metro Mobile Healthcare — Home">
+      <img src="assets/metro-logo-wide.png" alt="Metro Mobile Healthcare">
+    </a>
+  </div>
+  <a href="index.html" class="back">← Back to Home</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- GATE -->
+  <div class="gate-card" id="gate-card">
+    <div class="eyebrow">Family Assessment</div>
+    <h1>Enter Your Access Code</h1>
+    <p>Your Metro Mobile Healthcare coordinator gave you a short code when you spoke with them — enter it below to complete your family's needs assessment.</p>
+    <form id="gate-form">
+      <input type="text" id="gate-code" placeholder="Access code" maxlength="12" autocomplete="off">
+      <button type="submit" id="gate-submit">Continue →</button>
+    </form>
+    <span id="gate-error"></span>
+    <p class="gate-help">Don't have a code yet? <a href="index.html">Request a referral first</a> and we'll send you one.</p>
+  </div>
+
+  <!-- ASSESSMENT FORM -->
+  <div id="assessment">
+    <div class="intro">
+      <h1>Family Needs Assessment</h1>
+      <p>A few questions to help us understand your family's situation before your visit. This isn't a medical form — just context that helps us prepare. Takes about 3 minutes.</p>
+    </div>
+
+    <div class="a-card">
+      <form id="assessment-form">
+        <div class="a-section">
+          <label for="a-name">Your name</label>
+          <input type="text" id="a-name" name="name" required>
+        </div>
+
+        <div class="a-section">
+          <label for="a-client">Name of the family member we'll be visiting</label>
+          <input type="text" id="a-client" name="client_name" required>
+        </div>
+
+        <div class="a-section">
+          <label for="a-phone">Best phone number</label>
+          <input type="tel" id="a-phone" name="phone" required>
+        </div>
+
+        <div class="a-section">
+          <label>Who does this person currently live with?</label>
+          <div class="radio-row">
+            <label class="radio-opt"><input type="radio" name="living_with" value="alone"> Lives alone</label>
+            <label class="radio-opt"><input type="radio" name="living_with" value="spouse"> With a spouse/partner</label>
+            <label class="radio-opt"><input type="radio" name="living_with" value="family"> With family</label>
+            <label class="radio-opt"><input type="radio" name="living_with" value="caregiver"> With a caregiver</label>
+          </div>
+        </div>
+
+        <div class="a-section">
+          <label>What are you most concerned about right now?</label>
+          <div class="checkbox-row">
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="stairs"> Stairs or steps</label>
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="bathroom"> Bathroom / shower safety</label>
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="mobility"> General mobility or balance</label>
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="alone-time"> Time spent alone during the day</label>
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="recent-fall"> A recent fall or near-fall</label>
+            <label class="checkbox-opt"><input type="checkbox" name="concerns" value="other"> Something else</label>
+          </div>
+        </div>
+
+        <div class="a-section">
+          <label for="a-timeline">How soon are you hoping to move forward?</label>
+          <select id="a-timeline" name="timeline">
+            <option value="">Select one</option>
+            <option value="asap">As soon as possible</option>
+            <option value="2-4-weeks">Within the next few weeks</option>
+            <option value="just-exploring">Just exploring options for now</option>
+          </select>
+        </div>
+
+        <div class="a-section">
+          <label for="a-notes">Anything else that would help us prepare?</label>
+          <div class="sub">Optional — layout of the home, specific rooms of concern, timing constraints, etc.</div>
+          <textarea id="a-notes" name="notes" placeholder="Optional notes..."></textarea>
+        </div>
+
+        <button type="submit" class="a-submit" id="assessment-submit">Submit Assessment</button>
+        <span id="assessment-status"></span>
+        <p class="a-disclaimer">This form is for general planning purposes only and isn't a substitute for a clinical evaluation. Please don't include sensitive medical details — our therapist will cover those directly with you.</p>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Metro Mobile Health Care · Tulsa, OK · (918) 216-9303
+</footer>
+
+<script>
+  // Shared access code — change this value to update the code for all families.
+  // This is a lightweight gate, not real authentication: it keeps casual visitors
+  // out, but is not appropriate for protecting sensitive medical information.
+  const ACCESS_CODE = "METROFAMILY";
+
+  const gateForm = document.getElementById('gate-form');
+  const gateCard = document.getElementById('gate-card');
+  const gateError = document.getElementById('gate-error');
+  const assessment = document.getElementById('assessment');
+
+  gateForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const entered = document.getElementById('gate-code').value.trim().toUpperCase();
+    if (entered === ACCESS_CODE) {
+      gateCard.style.display = 'none';
+      assessment.style.display = 'block';
+    } else {
+      gateError.textContent = "That code doesn't match — check with your coordinator and try again.";
+    }
+  });
+
+  const assessmentForm = document.getElementById('assessment-form');
+  const assessmentStatus = document.getElementById('assessment-status');
+
+  assessmentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('assessment-submit');
+    submitBtn.disabled = true;
+    assessmentStatus.className = '';
+    assessmentStatus.textContent = 'Submitting...';
+
+    const formData = new FormData(assessmentForm);
+    const concerns = formData.getAll('concerns').join(', ') || 'none selected';
+
+    const payload = {
+      who: 'family',
+      service: 'family-assessment',
+      name: formData.get('name'),
+      client_name: formData.get('client_name'),
+      phone: formData.get('phone'),
+      email: '',
+      organization: '',
+      message: `Living situation: ${formData.get('living_with') || 'not specified'} | Concerns: ${concerns} | Timeline: ${formData.get('timeline') || 'not specified'} | Notes: ${formData.get('notes') || 'none'}`
+    };
+
+    try {
+      const res = await fetch('/api/referral', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('failed');
+      assessmentStatus.textContent = "Thank you — we've received your assessment and will be in touch.";
+      assessmentForm.reset();
+      assessmentForm.style.display = 'none';
+    } catch (err) {
+      assessmentStatus.className = 'error';
+      assessmentStatus.textContent = 'Something went wrong — please call (918) 216-9303 instead.';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
