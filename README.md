@@ -1,68 +1,63 @@
-# Metro Mobile Health Care — Safety Services Site
+# Stay Safe Home Solutions
 
-A hub landing page plus two standalone service-line pages for Metro Mobile
-Health Care. Not part of the Selko platform.
+One website, one brand, two services — Aging in Place assessments and
+Evolve Fall Detection monitoring, both under the Stay Safe Home Solutions
+name. This replaces the previous Metro Mobile Health Care branding on
+this domain.
 
 ## Pages
 
-- `index.html` — **Hub / landing page.** First stop for visitors — presents
-  both services side by side and lets them pick.
-- `fall-detection.html` — **Fall Detection / Evolve by TLS Global** (radar-based
-  fall monitoring, 24/7 remote wellness support)
-- `aging-in-place.html` — **Aging in Place** (PT/OT-led home safety
-  assessments and modifications)
+- `index.html` — hub/selector landing page (logo, quiz, both service cards)
+- `aging-in-place.html` — Aging in Place assessment service
+- `fall-detection.html` — Evolve fall detection & monitoring service
+- `family-assessment.html` — passcode-gated family needs intake form
 
-All three pages link to each other via nav. Both service pages submit their
-contact/referral forms to the same backend function, tagged by service.
+## What changed in this rebrand
 
-## Files
+- Logo swapped to the new Stay Safe Home Solutions mark (`assets/logo.png`)
+- Every instance of "Metro Mobile Health Care" / "Metro Mobile Healthcare"
+  replaced with "Stay Safe Home Solutions" — nav, footers, meta tags,
+  JSON-LD structured data, alt text
+- Canonical URLs, Open Graph tags, sitemap, and robots.txt updated to
+  `https://www.staysafehomesolutions.com`
+- Removed a line on the aging-in-place page that would have falsely
+  claimed the *Stay Safe Home Solutions* name itself has "years" of
+  history — reworded to credit the clinical team's experience instead,
+  which is accurate, without implying the brand name is older than it is
+- Removed a footer link pointing to metromobilehc.com, since this is now
+  presented as its own single brand
+- "Evolve by TLS Global" and "Powered by TLS Global / Tranquility Lifestyle
+  Solutions" were left as-is — those are the actual third-party technology
+  partner's names, not Metro's own branding, so they're accurate regardless
+  of this rebrand
 
-- `index.html` — hub/selector landing page (uses the real logo at `assets/metro-logo-wide.png`)
-- `fall-detection.html` — Fall Detection landing page
-- `aging-in-place.html` — Aging in Place landing page
-- `assets/metro-logo-wide.png` — official Metro Mobile Healthcare logo, true
-  transparent PNG extracted from the source .ai file
-- `assets/hero-photo.png` — hero photo used on the hub page
-- `api/referral.js` — shared Vercel serverless function that receives both
-  forms' submissions (distinguished by a `service` field: `fall-detection`
-  or `aging-in-place`)
+## One thing left unchanged — worth a decision
 
+`fall-detection.html`'s contact section still lists the email
+`metromobilehc@gmail.com`. I left this alone since it's a functioning
+contact address, not just a branding string, and changing it without
+confirming you have a working Stay Safe Home Solutions inbox would risk
+losing real leads. Let me know if you want this swapped to a different
+address once one exists.
 
-## Turning on email notifications
+## Deploying
 
-Both forms work right now — every submission is accepted and logged in
-Vercel's function logs — but no email goes out until you add three
-environment variables:
+This should replace whatever is currently deployed at
+`www.staysafehomesolutions.com`. Since that domain was previously pointing
+at the Metro hub Vercel project, either:
 
-1. In Vercel: **Project → Settings → Environment Variables**, add:
-   - `RESEND_API_KEY` — same Resend account already used for Selko Cred's
-     credential reminder emails
-   - `NOTIFY_EMAIL` — the inbox that should receive new referrals
-   - `NOTIFY_FROM` — a verified sending address on your Resend domain
-2. Redeploy the project.
+- Push these files to that same repo/project (simplest — same domain
+  config, just new content), or
+- Set up a new repo/project and re-point the domain to it
 
-No code changes needed — `api/referral.js` picks these up automatically,
-and labels each notification email by which service it came from.
+Either way, `aging.metromobilehc.com` and `www.staysafehomesolutions.com`
+should no longer serve the same content once this is live — decide
+whether the old `aging.metromobilehc.com` URL should redirect here or
+be retired.
 
-## Known follow-ups
+## Email notifications
 
-- The Evolve page's original Wix version referenced an `Evolve_by_TLS_Brochure.pdf`
-  download link — that file isn't included here. Add a real PDF at
-  `/Evolve_by_TLS_Brochure.pdf` if you want that download strip back, or say
-  the word and it can be rebuilt as an artifact.
-
-## Deploy / fix the aging.metromobilehc.com domain mix-up
-
-If `aging.metromobilehc.com` is currently pointing at a different Vercel
-project (e.g. Cred or Comply):
-
-1. Open that project → Settings → Domains → remove `aging.metromobilehc.com`
-2. Import this repo as its own Vercel project (no build config needed)
-3. In this project's Settings → Domains, add whichever domain should point
-   here — since this repo now serves all three pages (hub, aging-in-place,
-   fall-detection) from one project, one domain (e.g. `aging.metromobilehc.com`,
-   or a new one like `safety.metromobilehc.com`) can serve the whole hub, with
-   `/aging-in-place.html` and `/fall-detection.html` as the sub-pages.
-
-The CNAME in Wix is already correct for `aging.metromobilehc.com`, so
-re-pointing the domain in Vercel is usually instant.
+Same as before: set `RESEND_API_KEY`, `NOTIFY_EMAIL`, and `NOTIFY_FROM`
+as environment variables in Vercel, then redeploy. `api/referral.js` is
+unchanged and already labels submissions by service (Aging in Place,
+Fall Detection, Family Needs Assessment).
