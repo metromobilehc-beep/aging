@@ -40,6 +40,25 @@ confirming you have a working Stay Safe Home Solutions inbox would risk
 losing real leads. Let me know if you want this swapped to a different
 address once one exists.
 
+## Second rebrand — navy/red visual identity (Sep 2026)
+
+A full professional logo package replaced the original teal/orange design
+with a navy/red/gray identity:
+
+- **Colors**: Navy `#063B78`, Red `#E30613`, Ramp Gray `#A7B1BF`, White
+  — every page's color variables were remapped to this palette, including
+  hardcoded gradient/glow effects that weren't using CSS variables
+- **Logo**: `assets/logo.png` (horizontal, color) is the default used on
+  light backgrounds; `assets/logo-white.png` is used on `fall-detection.html`'s
+  dark navy nav instead of the earlier white-chip workaround; `assets/logo-stacked.png`
+  is available if a taller/vertical lockup is ever needed
+- **Favicon**: `favicon.ico` and `assets/apple-touch-icon.png` added to all
+  four pages — this site never had a proper favicon before
+- Per the brand guide included in the logo package: keep clear space around
+  the logo equal to one window-pane's height, don't stretch it or recolor
+  individual elements, and reserve red for accents/CTAs rather than large
+  fill areas
+
 ## Deploying
 
 This should replace whatever is currently deployed at
