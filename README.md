@@ -40,6 +40,32 @@ confirming you have a working Stay Safe Home Solutions inbox would risk
 losing real leads. Let me know if you want this swapped to a different
 address once one exists.
 
+## Third logo update — glossy AI-rendered style (Sep 2026)
+
+The flat vector logo package was replaced again with a different, more
+photorealistic/glossy house-and-ramp design (same navy/red/gray palette,
+different rendering style):
+
+- **`assets/logo.jpg`** — the full color lockup on a white background,
+  used on all light-background pages (`index.html`, `aging-in-place.html`,
+  `family-assessment.html`)
+- **`assets/logo-white.png`** — a matching white/red version with the
+  navy background removed (chroma-keyed to transparency, with edge
+  decontamination to avoid a dark fringe), used on `fall-detection.html`'s
+  dark navy nav
+- **Favicon set regenerated** from an icon-only crop of this new design
+  (`favicon.ico`, `assets/apple-touch-icon.png`)
+- Nav logo heights were increased on every page (34px/40px → 70-100px)
+  since this logo's proportions are much closer to square than the old
+  wide horizontal banner, so the old heights would have rendered it tiny
+
+**Note on `logo-white.png`**: it was produced by removing a solid navy
+background from an AI-generated image, not a true vector transparent
+export. It reads cleanly against the site's exact navy (`#063B78`) since
+that's what it was built for, but may show a faint edge if ever placed on
+a different background color — regenerate directly from the source AI
+tool if a cleaner version is needed later.
+
 ## Second rebrand — navy/red visual identity (Sep 2026)
 
 A full professional logo package replaced the original teal/orange design

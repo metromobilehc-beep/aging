@@ -26,7 +26,9 @@ export default async function handler(req, res) {
   }
 
   const submittedAt = new Date().toISOString();
-  const serviceLabel = service === 'fall-detection' ? 'Fall Detection (Evolve)' : 'Aging in Place';
+  const serviceLabel = service === 'fall-detection' ? 'Fall Detection (Evolve)'
+    : service === 'family-assessment' ? 'Family Needs Assessment'
+    : 'Aging in Place';
 
   // Always log the submission server-side so nothing is lost even before
   // notifications are wired up. Visible in Vercel's function logs.
